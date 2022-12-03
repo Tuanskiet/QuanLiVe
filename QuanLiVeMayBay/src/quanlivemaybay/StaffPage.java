@@ -11,9 +11,7 @@ import java.awt.event.WindowEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -22,9 +20,11 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
 import javax.swing.JOptionPane;
 import static javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE;
 import javax.swing.table.DefaultTableModel;
+import quanlivemaybay.helper.InsertData;
+import quanlivemaybay.model.User;
 import quanlivemaybay.helper.DatabaseHelper;
+import quanlivemaybay.helper.InsertData;
 import static quanlivemaybay.helper.InsertData.LoadDataToArray;
-import quanlivemaybay.helper.UpdateData;
 import quanlivemaybay.model.Controler;
 import quanlivemaybay.model.User;
 
@@ -32,10 +32,10 @@ import quanlivemaybay.model.User;
  *
  * @author FPT
  */
-public class StaffPage1 extends javax.swing.JFrame {
+public class StaffPage extends javax.swing.JFrame {
 
     String user = "sa";
-    String pass = "123456";
+    String pass = "123";
     String url = "jdbc:sqlserver://localhost;database=quanlimaybay";
     Connection con;
     PreparedStatement pst;
@@ -49,8 +49,18 @@ public class StaffPage1 extends javax.swing.JFrame {
     /**
      * Creates new form StaffPage
      */
-    public StaffPage1() {
+    public StaffPage() {
         initComponents();
+        ss();
+
+    }
+
+//    public StaffPage1() {
+//        initComponents();
+//        ss();
+//        
+//    }
+    public void ss() {
         jButton_QuayLai.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         jButton_KhoiPhucMK.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         jButton_SuaNhanVien.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -96,6 +106,7 @@ public class StaffPage1 extends javax.swing.JFrame {
         pst.setString(8, txtMaNV.getText());
         pst.executeUpdate();
         JOptionPane.showMessageDialog(this, "Update thành công!");
+        InsertData.LoadDataNhanVien();
         con.close();
 //        LoadDataToArray();
 
@@ -168,7 +179,7 @@ public class StaffPage1 extends javax.swing.JFrame {
         jLabel_BaoLoi = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jButton_KhoiPhucMK = new javax.swing.JButton();
-        cboGT = new javax.swing.JComboBox<String>();
+        cboGT = new javax.swing.JComboBox<>();
         jLabel7 = new javax.swing.JLabel();
         txtMail = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
@@ -183,7 +194,7 @@ public class StaffPage1 extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         txtMaNV = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
-        cboRole = new javax.swing.JComboBox<String>();
+        cboRole = new javax.swing.JComboBox<>();
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
 
@@ -253,7 +264,7 @@ public class StaffPage1 extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 543, Short.MAX_VALUE))
+                .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 544, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Quản lí vé", jPanel2);
@@ -364,7 +375,7 @@ public class StaffPage1 extends javax.swing.JFrame {
             }
         });
 
-        cboGT.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Nam", "Nữ" }));
+        cboGT.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nam", "Nữ" }));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel7.setText("Email");
@@ -387,6 +398,7 @@ public class StaffPage1 extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel2.setText("Mã NV/KH");
 
+        txtMaNV.setEnabled(false);
         txtMaNV.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtMaNVActionPerformed(evt);
@@ -396,7 +408,7 @@ public class StaffPage1 extends javax.swing.JFrame {
         jLabel14.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel14.setText("Phân Quyền");
 
-        cboRole.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "NV", "KH" }));
+        cboRole.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "NV", "KH" }));
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -619,7 +631,7 @@ public class StaffPage1 extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.dispose();
 
-        new StaffPage1().setVisible(true);
+        new StaffPage().setVisible(true);
     }//GEN-LAST:event_jButton_QuayLaiActionPerformed
 
     private void jTextField_TimKiemFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField_TimKiemFocusGained
@@ -644,8 +656,8 @@ public class StaffPage1 extends javax.swing.JFrame {
 
     private void jButton_ThemNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ThemNhanVienActionPerformed
         // TODO add your handling code here:
-        new DangKi().setVisible(true);
-        this.dispose();
+        
+
     }//GEN-LAST:event_jButton_ThemNhanVienActionPerformed
 
     private void jButton_XoaNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_XoaNhanVienActionPerformed
@@ -653,9 +665,9 @@ public class StaffPage1 extends javax.swing.JFrame {
             // TODO add your handling code here:
             removeKH();
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(StaffPage1.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(StaffPage.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(StaffPage1.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(StaffPage.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton_XoaNhanVienActionPerformed
 
@@ -663,9 +675,9 @@ public class StaffPage1 extends javax.swing.JFrame {
         try {
             suaNV();
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(StaffPage1.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(StaffPage.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(StaffPage1.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(StaffPage.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }//GEN-LAST:event_jButton_SuaNhanVienActionPerformed
@@ -699,21 +711,23 @@ public class StaffPage1 extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(StaffPage1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(StaffPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(StaffPage1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(StaffPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(StaffPage1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(StaffPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(StaffPage1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(StaffPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new StaffPage1().setVisible(true);
+                new StaffPage().setVisible(true);
             }
         });
     }
@@ -763,7 +777,7 @@ public class StaffPage1 extends javax.swing.JFrame {
 
     private void loadBangNhanVien() {
         dtmNhanVien.setRowCount(0);
-        LoadDataToArray();
+        InsertData.LoadDataNhanVien();
         for (User nv : Controler.arrayListTaiKhoan) {
             dtmNhanVien.addRow(new Object[]{
                 nv.getMaKH(), nv.getTenKH(), nv.getEmail(), nv.getSDT(), nv.getGioiTinh(), nv.getTenDN(), nv.getPassword(), nv.getRole()
