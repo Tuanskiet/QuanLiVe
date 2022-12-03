@@ -307,7 +307,7 @@ public class main extends javax.swing.JFrame {
 
                     if (role.equals("NV")) {
                         JOptionPane.showMessageDialog(this, "Đăng nhập vào tài khoản nhân viên thành công!");
-                        StaffPage sp = new StaffPage();
+                        StaffPage1 sp = new StaffPage1();
                         this.hide();
                         sp.setVisible(true);
                         return;
