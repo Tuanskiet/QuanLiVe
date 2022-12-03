@@ -11,9 +11,7 @@ import java.awt.event.WindowEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -22,10 +20,11 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
 import javax.swing.JOptionPane;
 import static javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE;
 import javax.swing.table.DefaultTableModel;
+import quanlivemaybay.helper.InsertData;
+import quanlivemaybay.model.User;
 import quanlivemaybay.helper.DatabaseHelper;
 import quanlivemaybay.helper.InsertData;
 import static quanlivemaybay.helper.InsertData.LoadDataToArray;
-import quanlivemaybay.helper.UpdateData;
 import quanlivemaybay.model.Controler;
 import quanlivemaybay.model.User;
 
@@ -36,7 +35,7 @@ import quanlivemaybay.model.User;
 public class StaffPage extends javax.swing.JFrame {
 
     String user = "sa";
-    String pass = "123456";
+    String pass = "123";
     String url = "jdbc:sqlserver://localhost;database=quanlimaybay";
     Connection con;
     PreparedStatement pst;
@@ -97,6 +96,7 @@ public class StaffPage extends javax.swing.JFrame {
         pst.setString(8, txtMaNV.getText());
         pst.executeUpdate();
         JOptionPane.showMessageDialog(this, "Update thành công!");
+        InsertData.LoadDataNhanVien();
         con.close();
 //        LoadDataToArray();
 
@@ -388,6 +388,7 @@ public class StaffPage extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel2.setText("Mã NV/KH");
 
+        txtMaNV.setEnabled(false);
         txtMaNV.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtMaNVActionPerformed(evt);
