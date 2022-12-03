@@ -7,6 +7,7 @@ package quanlivemaybay.helper;
 import quanlivemaybay.model.User;
 import java.sql.*;
 import javax.swing.JOptionPane;
+import quanlivemaybay.model.Controler;
 
 /**
  *
@@ -30,6 +31,31 @@ public class InsertData {
             ps.execute();
 
             JOptionPane.showMessageDialog(null, "Đăng kí thành công!");
+        } catch (Exception ex) {
+            System.out.println(ex);
+        }
+    }
+
+    public static void LoadDataToArray() {
+        try {
+            Connection conn = DatabaseHelper.openConnection();
+            Statement st = conn.createStatement();
+            String sql = "SELECT * FROM TAIKHOAN";
+            ResultSet rs = st.executeQuery(sql);
+            Controler.arrayListTaiKhoan.clear();
+            while (rs.next()) {
+                String maKH = rs.getString(1);
+                String tenKH = rs.getString(2);
+                String sdt = rs.getString(3);
+                String email = rs.getString(5);
+                String gt = rs.getString(4);
+                String tendn = rs.getString(6);
+                String pass = rs.getString(7);
+                String role = rs.getString(8);
+                User user = new User(maKH, tenKH, sdt, gt, email, tendn, pass, role);
+                Controler.arrayListTaiKhoan.add(user);
+            }
+            conn.close();
         } catch (Exception ex) {
             System.out.println(ex);
         }
