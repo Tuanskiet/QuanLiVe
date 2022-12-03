@@ -342,8 +342,6 @@ public class main extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         DangKi l = new DangKi(this);
-        //        l.setLocation(460, 100);
-        //        m.jDesktopPane1.add(l);
         this.setVisible(false);
         l.setVisible(true);
 
