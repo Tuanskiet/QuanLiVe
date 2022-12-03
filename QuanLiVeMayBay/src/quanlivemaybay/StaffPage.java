@@ -51,6 +51,16 @@ public class StaffPage extends javax.swing.JFrame {
      */
     public StaffPage() {
         initComponents();
+        ss();
+
+    }
+
+//    public StaffPage1() {
+//        initComponents();
+//        ss();
+//        
+//    }
+    public void ss() {
         jButton_QuayLai.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         jButton_KhoiPhucMK.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         jButton_SuaNhanVien.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -646,8 +656,8 @@ public class StaffPage extends javax.swing.JFrame {
 
     private void jButton_ThemNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ThemNhanVienActionPerformed
         // TODO add your handling code here:
-        new DangKi().setVisible(true);
-        this.dispose();
+        
+
     }//GEN-LAST:event_jButton_ThemNhanVienActionPerformed
 
     private void jButton_XoaNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_XoaNhanVienActionPerformed
