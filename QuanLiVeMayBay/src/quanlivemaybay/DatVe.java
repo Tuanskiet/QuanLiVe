@@ -1,20 +1,43 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package quanlivemaybay;
 
+import java.awt.List;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Vector;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
- * @author FPT
+ * @author ADMIN
  */
-public class DatVe extends javax.swing.JInternalFrame {
+public class Datve extends javax.swing.JFrame {
+
+    String name = "sa";
+    String pass = "123";
+    String url = "jdbc:sqlserver://localhost:1111;database=quanlimaybay;integratedSecurity=false;trustServerCertificate=true";
+    DefaultTableModel tblmodel = null;
+    Vector row = null;
+    int index = 0;
+    ArrayList<Datvemain> list = new ArrayList<>();
 
     /**
-     * Creates new form DatVev
+     * Creates new form Datve
      */
-    public DatVe() {
+    public Datve() {
         initComponents();
+        setLocationRelativeTo(null);
+        initTable();
+        loaddata();
     }
 
     /**
@@ -26,43 +49,66 @@ public class DatVe extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPasswordField1 = new javax.swing.JPasswordField();
+        jMenu1 = new javax.swing.JMenu();
+        jInternalFrame1 = new javax.swing.JInternalFrame();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        btnlammoi = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jButton2 = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        cbokhoihanh = new javax.swing.JComboBox<>();
+        cbodiemden = new javax.swing.JComboBox<>();
+        btntimkiem = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tbldatve = new javax.swing.JTable();
+        jLabel5 = new javax.swing.JLabel();
+        lbldiemkh = new javax.swing.JLabel();
+        lbldiemden = new javax.swing.JLabel();
+        lblngaybay = new javax.swing.JLabel();
+        lblthoigian = new javax.swing.JLabel();
+        btnmua = new javax.swing.JButton();
 
-        jPasswordField1.setText("jPasswordField1");
+        jMenu1.setText("jMenu1");
 
-        setPreferredSize(new java.awt.Dimension(1340, 580));
-        setRequestFocusEnabled(false);
-        setVerifyInputWhenFocusTarget(false);
-        setVisible(true);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/rsz_repeat.png"))); // NOI18N
-        jButton1.setText("Làm mới ");
+        jInternalFrame1.setVisible(true);
+
+        btnlammoi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/rsz_repeat.png"))); // NOI18N
+        btnlammoi.setText("Làm mới ");
+        btnlammoi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnlammoiActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("ĐIỂM KHỞI HÀNH ");
 
         jLabel2.setText("ĐIỂM ĐẾN");
 
-        jLabel3.setText("NGÀY BAY");
+        cbokhoihanh.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hà Nội", "Sài Gòn", " " }));
+        cbokhoihanh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbokhoihanhActionPerformed(evt);
+            }
+        });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbodiemden.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hà Nội", "Sài Gòn" }));
+        cbodiemden.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbodiemdenActionPerformed(evt);
+            }
+        });
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        btntimkiem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/rsz_ticketfind.png"))); // NOI18N
+        btntimkiem.setText("Tìm kiếm");
+        btntimkiem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btntimkiemActionPerformed(evt);
+            }
+        });
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/rsz_ticketfind.png"))); // NOI18N
-        jButton2.setText("Tìm kiếm");
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tbldatve.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -73,7 +119,27 @@ public class DatVe extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        tbldatve.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbldatveMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tbldatve);
+
+        lbldiemkh.setText("Điểm Khởi Hành");
+
+        lbldiemden.setText("Điẻm Đến");
+
+        lblngaybay.setText("Ngày Bay");
+
+        lblthoigian.setText("Thời Gian Bay");
+
+        btnmua.setText("Mua Vé");
+        btnmua.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnmuaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -82,77 +148,288 @@ public class DatVe extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnlammoi)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(75, 75, 75)
-                                .addComponent(jLabel2)
-                                .addGap(98, 98, 98)
+                                .addGap(114, 114, 114)
+                                .addComponent(cbokhoihanh, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(160, 160, 160)
-                                        .addComponent(jButton2)))
-                                .addContainerGap(563, Short.MAX_VALUE))
+                                        .addGap(247, 247, 247)
+                                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 161, Short.MAX_VALUE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(cbodiemden, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(105, 105, 105)))
+                                .addComponent(btntimkiem))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(50, 50, 50)
-                                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))))))
+                                .addGap(122, 122, 122)
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel2)
+                                .addGap(276, 276, 276))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane2)
+                        .addContainerGap())))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(394, 394, 394)
+                        .addComponent(btnmua, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(69, 69, 69)
+                        .addComponent(lbldiemkh, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(57, 57, 57)
+                        .addComponent(lbldiemden, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(60, 60, 60)
+                        .addComponent(lblngaybay, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(107, 107, 107)
+                        .addComponent(lblthoigian, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton1)
-                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
-                .addContainerGap())
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cbodiemden, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbokhoihanh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btntimkiem, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5)))
+                    .addComponent(btnlammoi))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(34, 34, 34)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 115, Short.MAX_VALUE)
+                        .addComponent(btnmua)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblngaybay, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbldiemden, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbldiemkh, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblthoigian))
+                        .addGap(75, 75, 75))))
         );
 
         jTabbedPane1.addTab("Đặt vé", jPanel1);
+
+        javax.swing.GroupLayout jInternalFrame1Layout = new javax.swing.GroupLayout(jInternalFrame1.getContentPane());
+        jInternalFrame1.getContentPane().setLayout(jInternalFrame1Layout);
+        jInternalFrame1Layout.setHorizontalGroup(
+            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jInternalFrame1Layout.createSequentialGroup()
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 965, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        jInternalFrame1Layout.setVerticalGroup(
+            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jInternalFrame1Layout.createSequentialGroup()
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 451, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(jInternalFrame1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jInternalFrame1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btntimkiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btntimkiemActionPerformed
+        // TODO add your handling code here:
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            Connection con = DriverManager.getConnection(url, name, pass);
+            String sql = "select * from datve where DiemKH = ? and Diemden = ?";
+            PreparedStatement st = con.prepareStatement(sql);
+            st.setString(1, cbokhoihanh.getSelectedItem().toString());
+            st.setString(2, cbodiemden.getSelectedItem().toString());
+            ResultSet rs = st.executeQuery();
+            int find = -1;
+            tblmodel.setRowCount(0);
+            while (rs.next() == true) {
+                if (cbokhoihanh.getSelectedItem().equals(rs.getString(1)) && cbodiemden.getSelectedItem().equals(rs.getString(2))) {
+                    find = 0;
+                    Vector row = new Vector();
+                    row.add(rs.getString(1));
+                    row.add(rs.getString(2));
+                    row.add(rs.getString(3));
+                    row.add(rs.getString(4));
+                    tblmodel.addRow(row);
+                }
+            }
+            if (find == 0) {
+
+                JOptionPane.showMessageDialog(this, "da tim thay");
+            } else {
+                JOptionPane.showMessageDialog(this, "khong tim thay");
+            }
+
+            con.close();
+        } catch (Exception e) {
+        }
+
+
+    }//GEN-LAST:event_btntimkiemActionPerformed
+
+    private void getListTable() {
+        int row = tbldatve.getSelectedRow();
+        if (row >= 0) {
+            index = row;
+            showDetail(index);
+        }
+
+    }
+
+    private void showDetail(int index) {
+        Datvemain diem = list.get(index);
+        lbldiemkh.setText(diem.getDiemkhoihanh());
+        lbldiemden.setText(diem.getDiemden());
+        lblngaybay.setText(diem.getNgaybay());
+        lblthoigian.setText(diem.getGiobay());
+    }
+
+    private void cbokhoihanhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbokhoihanhActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbokhoihanhActionPerformed
+
+    private void cbodiemdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbodiemdenActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbodiemdenActionPerformed
+
+    private void btnlammoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnlammoiActionPerformed
+        // TODO add your handling code here:
+        tblmodel.setRowCount(0);
+        loaddata();
+
+
+    }//GEN-LAST:event_btnlammoiActionPerformed
+
+    private void tbldatveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbldatveMouseClicked
+        // TODO add your handling code here:
+        getListTable();
+    }//GEN-LAST:event_tbldatveMouseClicked
+
+    private void btnmuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmuaActionPerformed
+        // TODO add your handling code here:
+        String t = "Điểm Khởi Hành:" + lbldiemkh.getText() + "\n";
+        t += "Điểm Đến:" + lbldiemden.getText() + "\n";
+        t += "Ngày Bay:" + lblngaybay.getText() + "\n";
+        t += "Thời Gian Bay:" + lblthoigian.getText() + "\n";
+        t += "Đặt vé thành công";
+        JOptionPane.showMessageDialog(this, t);
+    }//GEN-LAST:event_btnmuaActionPerformed
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(Datve.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(Datve.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(Datve.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(Datve.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new Datve().setVisible(true);
+            }
+        });
+    }
+
+    public void initTable() {
+        tblmodel = (DefaultTableModel) tbldatve.getModel();
+        tblmodel.setColumnIdentifiers(new String[]{"Điểm Khởi Hành", "Điểm Đến", "Ngày Bay", "Thời Gian Bay"});
+    }
+
+    public void loaddata() {
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            Connection con = DriverManager.getConnection(url, name, pass);
+            Statement st = con.createStatement();
+            String sql = "select * from datve";
+            ResultSet rs = st.executeQuery(sql);
+
+            while (rs.next()) {
+                Vector row = new Vector();
+                row.add(rs.getString(1));
+                row.add(rs.getString(2));
+                row.add(rs.getString(3));
+                row.add(rs.getString(4));
+                tblmodel.addRow(row);
+                String kh = rs.getString(1);
+                String dd = rs.getString(2);
+                String nb = rs.getString(3);
+                String tg = rs.getString(4);
+                Datvemain dv = new Datvemain(kh, dd, nb, tg);
+                list.add(dv);
+            }
+            tbldatve.setModel(tblmodel);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JButton btnlammoi;
+    private javax.swing.JButton btnmua;
+    private javax.swing.JButton btntimkiem;
+    private javax.swing.JComboBox<String> cbodiemden;
+    private javax.swing.JComboBox<String> cbokhoihanh;
+    private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JLabel lbldiemden;
+    private javax.swing.JLabel lbldiemkh;
+    private javax.swing.JLabel lblngaybay;
+    private javax.swing.JLabel lblthoigian;
+    private javax.swing.JTable tbldatve;
     // End of variables declaration//GEN-END:variables
 }

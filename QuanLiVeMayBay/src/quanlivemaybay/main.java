@@ -22,8 +22,8 @@ import quanlivemaybay.helper.DatabaseHelper;
 public class main extends javax.swing.JFrame {
 
     String user = "sa";
-    String pass = "123";
-    String url = "jdbc:sqlserver://localhost;database=quanlimaybay";
+    String passw = "123";
+    String url = "jdbc:sqlserver://localhost:1111;database=quanlimaybay;integratedSecurity=false;trustServerCertificate=true";
     Connection conn;
     PreparedStatement pst;
 
@@ -276,7 +276,7 @@ public class main extends javax.swing.JFrame {
         } else {
             try {
                 Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-                conn = DriverManager.getConnection("jdbc:sqlserver://localhost;database=quanlimaybay", "sa", "123");
+                conn = DriverManager.getConnection(url,user,passw);
                 pst = conn.prepareStatement("select * from Taikhoan where TenDangnhap = ?  and MatKhau =? and role =?");
                 String role = "";
                 if (rdoNV.isSelected()) {

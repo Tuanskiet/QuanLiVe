@@ -215,7 +215,7 @@ public class UserPage extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
-       DatVe d = new DatVe();
+       Datve d = new Datve();
        jDesktopPane1.add(d);
        d.setVisible(true);
     }//GEN-LAST:event_jButton13ActionPerformed
