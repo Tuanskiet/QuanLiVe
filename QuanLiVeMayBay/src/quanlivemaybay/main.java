@@ -23,7 +23,7 @@ public class main extends javax.swing.JFrame {
 
     String user = "sa";
     String passw = "123";
-    String url = "jdbc:sqlserver://localhost:1111;database=quanlimaybay;integratedSecurity=false;trustServerCertificate=true";
+    String url = "jdbc:sqlserver://localhost:1433;database=quanlimaybay;integratedSecurity=false;trustServerCertificate=true";
     Connection conn;
     PreparedStatement pst;
 
