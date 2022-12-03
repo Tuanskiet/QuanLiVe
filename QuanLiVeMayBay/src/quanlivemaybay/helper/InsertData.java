@@ -36,7 +36,31 @@ public class InsertData {
         }
     }
 
-    public static void LoadDataToArray() {
+    public static void LoadDataToArray(String ma) {
+        try {
+            Connection conn = DatabaseHelper.openConnection();
+            Statement st = conn.createStatement();
+            String sql = "SELECT * FROM TAIKHOAN WHERE TENDANGNHAP = '" + ma + "'";
+            ResultSet rs = st.executeQuery(sql);
+            Controler.arrayListTaiKhoan.clear();
+            while (rs.next()) {
+                String maKH = rs.getString(1);
+                String tenKH = rs.getString(2);
+                String sdt = rs.getString(3);
+                String email = rs.getString(5);
+                String gt = rs.getString(4);
+                String tendn = rs.getString(6);
+                String pass = rs.getString(7);
+                String role = rs.getString(8);
+                User user = new User(maKH, tenKH, sdt, gt, email, tendn, pass, role);
+                Controler.arrayListTaiKhoan.add(user);
+            }
+            conn.close();
+        } catch (Exception ex) {
+            System.out.println(ex);
+        }
+    }
+    public static void LoadDataNhanVien() {
         try {
             Connection conn = DatabaseHelper.openConnection();
             Statement st = conn.createStatement();
