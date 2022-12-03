@@ -11,9 +11,7 @@ import java.awt.event.WindowEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -22,9 +20,7 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
 import javax.swing.JOptionPane;
 import static javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE;
 import javax.swing.table.DefaultTableModel;
-import quanlivemaybay.helper.DatabaseHelper;
 import static quanlivemaybay.helper.InsertData.LoadDataToArray;
-import quanlivemaybay.helper.UpdateData;
 import quanlivemaybay.model.Controler;
 import quanlivemaybay.model.User;
 
@@ -35,7 +31,7 @@ import quanlivemaybay.model.User;
 public class StaffPage1 extends javax.swing.JFrame {
 
     String user = "sa";
-    String pass = "123456";
+    String pass = "123";
     String url = "jdbc:sqlserver://localhost;database=quanlimaybay";
     Connection con;
     PreparedStatement pst;
