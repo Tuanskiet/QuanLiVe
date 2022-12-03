@@ -20,7 +20,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author ADMIN
  */
-public class Datve extends javax.swing.JFrame {
+public class DatVe extends javax.swing.JFrame {
 
     String name = "sa";
     String pass = "123";
@@ -33,7 +33,7 @@ public class Datve extends javax.swing.JFrame {
     /**
      * Creates new form Datve
      */
-    public Datve() {
+    public DatVe() {
         initComponents();
         setLocationRelativeTo(null);
         initTable();
@@ -360,20 +360,20 @@ public class Datve extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Datve.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DatVe.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Datve.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DatVe.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Datve.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DatVe.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Datve.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DatVe.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Datve().setVisible(true);
+                new DatVe().setVisible(true);
             }
         });
     }
