@@ -113,7 +113,6 @@ public class QuenMK extends javax.swing.JDialog {
         jLabel3.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel3.setText("Email đã đăng kí : ");
 
-        txtEmail.setText("luctuankietkg@gmail.com");
         txtEmail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtEmailActionPerformed(evt);
