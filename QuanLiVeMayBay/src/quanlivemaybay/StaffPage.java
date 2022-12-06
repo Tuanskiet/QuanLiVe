@@ -21,10 +21,6 @@ import javax.swing.JOptionPane;
 import static javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE;
 import javax.swing.table.DefaultTableModel;
 import quanlivemaybay.helper.InsertData;
-import quanlivemaybay.model.User;
-import quanlivemaybay.helper.DatabaseHelper;
-import quanlivemaybay.helper.InsertData;
-import static quanlivemaybay.helper.InsertData.LoadDataToArray;
 import quanlivemaybay.model.Controler;
 import quanlivemaybay.model.User;
 
@@ -155,6 +151,8 @@ public class StaffPage extends javax.swing.JFrame {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
+        jToolBar2 = new javax.swing.JToolBar();
+        jButton3 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jToolBar1 = new javax.swing.JToolBar();
         jButton1 = new javax.swing.JButton();
@@ -196,25 +194,36 @@ public class StaffPage extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
         cboRole = new javax.swing.JComboBox<>();
         jPanel4 = new javax.swing.JPanel();
-        jPanel5 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jToolBar2.setRollover(true);
+
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/rsz_exit.png"))); // NOI18N
+        jButton3.setText("Thoát");
+        jButton3.setFocusable(false);
+        jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar2.add(jButton3);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 708, Short.MAX_VALUE)
+            .addComponent(jToolBar2, javax.swing.GroupLayout.DEFAULT_SIZE, 900, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 618, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jToolBar2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 586, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Danh mục điều khiển ", jPanel1);
 
         jToolBar1.setRollover(true);
 
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/rsz_ticket.png"))); // NOI18N
         jButton1.setText("Bán vé");
         jButton1.setFocusable(false);
         jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -226,6 +235,7 @@ public class StaffPage extends javax.swing.JFrame {
         });
         jToolBar1.add(jButton1);
 
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/rsz_ticket-machine.png"))); // NOI18N
         jButton2.setText("Kiểm tra vé");
         jButton2.setFocusable(false);
         jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -243,11 +253,11 @@ public class StaffPage extends javax.swing.JFrame {
         jDesktopPane1.setLayout(jDesktopPane1Layout);
         jDesktopPane1Layout.setHorizontalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 900, Short.MAX_VALUE)
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 543, Short.MAX_VALUE)
+            .addGap(0, 568, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -255,16 +265,18 @@ public class StaffPage extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 675, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 33, Short.MAX_VALUE))
-            .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 714, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 675, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 900, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 544, Short.MAX_VALUE))
+                .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 568, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Quản lí vé", jPanel2);
@@ -549,7 +561,7 @@ public class StaffPage extends javax.swing.JFrame {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 714, Short.MAX_VALUE)
+            .addGap(0, 900, Short.MAX_VALUE)
             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel3Layout.createSequentialGroup()
                     .addContainerGap()
@@ -558,7 +570,7 @@ public class StaffPage extends javax.swing.JFrame {
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 618, Short.MAX_VALUE)
+            .addGap(0, 669, Short.MAX_VALUE)
             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel3Layout.createSequentialGroup()
                     .addContainerGap()
@@ -572,27 +584,14 @@ public class StaffPage extends javax.swing.JFrame {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 708, Short.MAX_VALUE)
+            .addGap(0, 900, Short.MAX_VALUE)
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 618, Short.MAX_VALUE)
+            .addGap(0, 669, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Thống kê", jPanel4);
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 708, Short.MAX_VALUE)
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 618, Short.MAX_VALUE)
-        );
-
-        jTabbedPane1.addTab("Thoát", jPanel5);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -602,63 +601,33 @@ public class StaffPage extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(jTabbedPane1)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        BanVeMB d = new BanVeMB();
-        jDesktopPane1.add(d);
-        d.setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        KiemTraVeStaff d = new KiemTraVeStaff();
-        jDesktopPane1.add(d);
-        d.setVisible(true);
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jTable_NhanVienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable_NhanVienMouseClicked
+    private void jPanel6MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel6MousePressed
         // TODO add your handling code here:
-        index = jTable_NhanVien.getSelectedRow();
-        showDetail(index);
+    }//GEN-LAST:event_jPanel6MousePressed
 
-    }//GEN-LAST:event_jTable_NhanVienMouseClicked
-
-    private void jButton_QuayLaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_QuayLaiActionPerformed
+    private void txtMaNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMaNVActionPerformed
         // TODO add your handling code here:
-        this.dispose();
+    }//GEN-LAST:event_txtMaNVActionPerformed
 
-        new StaffPage().setVisible(true);
-    }//GEN-LAST:event_jButton_QuayLaiActionPerformed
+    private void jButton_KhoiPhucMKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_KhoiPhucMKActionPerformed
 
-    private void jTextField_TimKiemFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField_TimKiemFocusGained
-        // TODO add your handling code here:
-        if (jTextField_TimKiem.getText().equals("Tìm nhân viên theo mã nhân viên/khách hàng")) {
-            jTextField_TimKiem.setText("");
-            jTextField_TimKiem.setForeground(Color.black);
+    }//GEN-LAST:event_jButton_KhoiPhucMKActionPerformed
+
+    private void jButton_SuaNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_SuaNhanVienActionPerformed
+        try {
+            suaNV();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(StaffPage.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(StaffPage.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jTextField_TimKiemFocusGained
-
-    private void jTextField_TimKiemFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField_TimKiemFocusLost
-        // TODO add your handling code here:
-        if (jTextField_TimKiem.getText().isEmpty()) {
-            jTextField_TimKiem.setText("Tìm nhân viên theo sđt");
-            jTextField_TimKiem.setForeground(Color.gray);
-        }
-    }//GEN-LAST:event_jTextField_TimKiemFocusLost
-
-    private void jTextField_TimKiemKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField_TimKiemKeyReleased
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField_TimKiemKeyReleased
-
-    private void jButton_ThemNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ThemNhanVienActionPerformed
-        // TODO add your handling code here:
-        
-
-    }//GEN-LAST:event_jButton_ThemNhanVienActionPerformed
+    }//GEN-LAST:event_jButton_SuaNhanVienActionPerformed
 
     private void jButton_XoaNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_XoaNhanVienActionPerformed
         try {
@@ -671,28 +640,55 @@ public class StaffPage extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton_XoaNhanVienActionPerformed
 
-    private void jButton_SuaNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_SuaNhanVienActionPerformed
-        try {
-            suaNV();
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(StaffPage.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(StaffPage.class.getName()).log(Level.SEVERE, null, ex);
+    private void jButton_ThemNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ThemNhanVienActionPerformed
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_jButton_ThemNhanVienActionPerformed
+
+    private void jTextField_TimKiemKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField_TimKiemKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField_TimKiemKeyReleased
+
+    private void jTextField_TimKiemFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField_TimKiemFocusLost
+        // TODO add your handling code here:
+        if (jTextField_TimKiem.getText().isEmpty()) {
+            jTextField_TimKiem.setText("Tìm nhân viên theo sđt");
+            jTextField_TimKiem.setForeground(Color.gray);
         }
+    }//GEN-LAST:event_jTextField_TimKiemFocusLost
 
-    }//GEN-LAST:event_jButton_SuaNhanVienActionPerformed
-
-    private void jButton_KhoiPhucMKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_KhoiPhucMKActionPerformed
-
-    }//GEN-LAST:event_jButton_KhoiPhucMKActionPerformed
-
-    private void txtMaNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMaNVActionPerformed
+    private void jTextField_TimKiemFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField_TimKiemFocusGained
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtMaNVActionPerformed
+        if (jTextField_TimKiem.getText().equals("Tìm nhân viên theo mã nhân viên/khách hàng")) {
+            jTextField_TimKiem.setText("");
+            jTextField_TimKiem.setForeground(Color.black);
+        }
+    }//GEN-LAST:event_jTextField_TimKiemFocusGained
 
-    private void jPanel6MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel6MousePressed
+    private void jButton_QuayLaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_QuayLaiActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jPanel6MousePressed
+        this.dispose();
+
+        new StaffPage().setVisible(true);
+    }//GEN-LAST:event_jButton_QuayLaiActionPerformed
+
+    private void jTable_NhanVienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable_NhanVienMouseClicked
+        // TODO add your handling code here:
+        index = jTable_NhanVien.getSelectedRow();
+        showDetail(index);
+    }//GEN-LAST:event_jTable_NhanVienMouseClicked
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        KiemTraVeStaff d = new KiemTraVeStaff();
+        jDesktopPane1.add(d);
+        d.setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        BanVeMB d = new BanVeMB();
+        jDesktopPane1.add(d);
+        d.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -737,6 +733,7 @@ public class StaffPage extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cboRole;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton_KhoiPhucMK;
     private javax.swing.JButton jButton_QuayLai;
     private javax.swing.JButton jButton_SuaNhanVien;
@@ -759,7 +756,6 @@ public class StaffPage extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator2;
@@ -767,6 +763,7 @@ public class StaffPage extends javax.swing.JFrame {
     private javax.swing.JTable jTable_NhanVien;
     private javax.swing.JTextField jTextField_TimKiem;
     private javax.swing.JToolBar jToolBar1;
+    private javax.swing.JToolBar jToolBar2;
     private javax.swing.JTextField txtMaNV;
     private javax.swing.JTextField txtMail;
     private javax.swing.JTextField txtPass;

@@ -7,7 +7,6 @@ package quanlivemaybay;
 import java.awt.HeadlessException;
 import javax.swing.JOptionPane;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -319,8 +318,8 @@ public class main extends javax.swing.JFrame {
 
                 } else {
                     JOptionPane.showMessageDialog(this, "Username or pass do not match");
-                    txtUserName.setText("");
-                    txtPassWord.setText("");
+//                    txtUserName.setText("");
+//                    txtPassWord.setText("");
                     txtUserName.requestFocus();
                 }
             } catch (HeadlessException | ClassNotFoundException | SQLException e) {
