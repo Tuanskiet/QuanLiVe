@@ -16,7 +16,7 @@ import quanlivemaybay.model.Controler;
 public class InsertData {
 
     public static void insertTaiKhoan(User user, Character i) throws Exception {
-        String sqlCommand = "INSERT INTO TAIKHOAN VALUES (?,?,?,?,?,?,?,?)";
+        String sqlCommand = "INSERT INTO TAIKHOAN VALUES (?,?,?,?,?,?,?,?,?)";
         try {
             Connection con = DatabaseHelper.openConnection();
             PreparedStatement ps = con.prepareStatement(sqlCommand);
@@ -27,7 +27,9 @@ public class InsertData {
             ps.setString(5, user.getEmail());
             ps.setString(6, user.getTenDN());
             ps.setString(7, user.getPassword());
-            ps.setString(8, "KH");
+            ps.setString(8, user.getRole());
+            ps.setBoolean(9, false);
+
             ps.execute();
 
             JOptionPane.showMessageDialog(null, "Đăng kí thành công!");
@@ -60,6 +62,7 @@ public class InsertData {
             System.out.println(ex);
         }
     }
+
     public static void LoadDataNhanVien() {
         try {
             Connection conn = DatabaseHelper.openConnection();

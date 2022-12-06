@@ -43,6 +43,7 @@ public class StaffPage extends javax.swing.JFrame {
     String tenNV;
     int index = 0;
     DefaultTableModel dtmNhanVien = null;
+    boolean flag = false;
 
     /**
      * Creates new form StaffPage
@@ -52,8 +53,8 @@ public class StaffPage extends javax.swing.JFrame {
         ss();
 
     }
-    
-     public void autoID() {
+
+    public void autoID() {
 
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
@@ -77,7 +78,6 @@ public class StaffPage extends javax.swing.JFrame {
             Logger.getLogger(DangKi.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
 
 //    public StaffPage1() {
 //        initComponents();
@@ -369,7 +369,7 @@ public class StaffPage extends javax.swing.JFrame {
         jButton_ThemNhanVien.setBackground(new java.awt.Color(255, 121, 63));
         jButton_ThemNhanVien.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
         jButton_ThemNhanVien.setForeground(new java.awt.Color(255, 255, 255));
-        jButton_ThemNhanVien.setText("Thêm ");
+        jButton_ThemNhanVien.setText("Thêm mới");
         jButton_ThemNhanVien.setBorderPainted(false);
         jButton_ThemNhanVien.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -669,17 +669,37 @@ public class StaffPage extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton_XoaNhanVienActionPerformed
 
     private void jButton_ThemNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ThemNhanVienActionPerformed
-        boolean flag = false;
         if (flag == false) {
-            flag = true;
             autoID();
             txtTenNV.setText("");
             txtUser.setText("");
             txtMail.setText("");
             txtPass.setText("");
             txtSDT.setText("");
+            flag = true;
             jButton_ThemNhanVien.setText("Lưu");
         } else {
+            String maKH = txtMaNV.getText();
+            String tenKH = txtTenNV.getText();
+            String soDT = txtSDT.getText();
+            String gioiTinh = cboGT.getSelectedItem().toString();
+            String email = txtMail.getText();
+            String tenDN = txtUser.getText();
+            String passw = txtPass.getText();
+            String role = cboRole.getSelectedItem().toString();
+
+            User users = new User(maKH, tenKH, soDT, gioiTinh, email, tenDN, passw, role);
+            try {
+                InsertData.insertTaiKhoan(users, 'i');
+                Controler.arrayListTaiKhoan.add(users);
+                loadBangNhanVien();
+
+            } catch (ClassNotFoundException | SQLException ex) {
+                Logger.getLogger(DangKi.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (Exception ex) {
+                Logger.getLogger(DangKi.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
             jButton_ThemNhanVien.setText("Thêm mới");
             flag = false;
 
