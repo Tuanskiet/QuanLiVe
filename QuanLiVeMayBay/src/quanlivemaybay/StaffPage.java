@@ -11,7 +11,9 @@ import java.awt.event.WindowEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -50,6 +52,32 @@ public class StaffPage extends javax.swing.JFrame {
         ss();
 
     }
+    
+     public void autoID() {
+
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            con = DriverManager.getConnection(url, user, pass);
+            Statement s = con.createStatement();
+            ResultSet rs = s.executeQuery("select MAX(MaKh) from taikhoan");
+            rs.next();
+            rs.getString(1);
+            if (rs.getString(1) == null) {
+                txtMaNV.setText("KH001");
+            } else {
+                long id = Long.parseLong(rs.getString(1).substring(2, rs.getString(1).length()));
+                id++;
+                txtMaNV.setText("KH" + String.format("%03d", id));
+
+            }
+
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DangKi.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(DangKi.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
 
 //    public StaffPage1() {
 //        initComponents();
@@ -641,7 +669,21 @@ public class StaffPage extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton_XoaNhanVienActionPerformed
 
     private void jButton_ThemNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ThemNhanVienActionPerformed
-        // TODO add your handling code here:
+        boolean flag = false;
+        if (flag == false) {
+            flag = true;
+            autoID();
+            txtTenNV.setText("");
+            txtUser.setText("");
+            txtMail.setText("");
+            txtPass.setText("");
+            txtSDT.setText("");
+            jButton_ThemNhanVien.setText("Lưu");
+        } else {
+            jButton_ThemNhanVien.setText("Thêm mới");
+            flag = false;
+
+        }
 
     }//GEN-LAST:event_jButton_ThemNhanVienActionPerformed
 
