@@ -33,23 +33,6 @@ public class BanVeMB extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        txtMaKhachHang = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        txtTenKhachHang = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        txtNgaySinh = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        txtCmnd = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
-        cboGioiTinh = new javax.swing.JComboBox<>();
-        jLabel8 = new javax.swing.JLabel();
-        txtDiaChi = new javax.swing.JTextField();
-        jLabel9 = new javax.swing.JLabel();
-        txtSoDienThoai = new javax.swing.JTextField();
-        jLabel10 = new javax.swing.JLabel();
-        txtEmail = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
@@ -82,7 +65,7 @@ public class BanVeMB extends javax.swing.JInternalFrame {
         jLabel19 = new javax.swing.JLabel();
         txtGiaVe = new javax.swing.JTextField();
 
-        setPreferredSize(new java.awt.Dimension(1360, 580));
+        setPreferredSize(new java.awt.Dimension(900, 568));
 
         jPanel11.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 50, 5));
 
@@ -110,65 +93,12 @@ public class BanVeMB extends javax.swing.JInternalFrame {
 
         jPanel1.setLayout(new java.awt.GridBagLayout());
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 3, 36)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 3, 24)); // NOI18N
         jLabel1.setText("Chuong trinh ban ve may bay Poly Ariline");
         jPanel1.add(jLabel1, new java.awt.GridBagConstraints());
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Thong tin can nhap"));
-        jPanel2.setLayout(new java.awt.GridLayout(1, 0));
-
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Thong tin khach hang"));
-        jPanel3.setLayout(new java.awt.GridLayout(8, 2, 20, 20));
-
-        jLabel2.setText("Ma khach hang:");
-        jPanel3.add(jLabel2);
-
-        txtMaKhachHang.setPreferredSize(new java.awt.Dimension(40, 29));
-        jPanel3.add(txtMaKhachHang);
-
-        jLabel4.setText("Ten khach hang:");
-        jPanel3.add(jLabel4);
-
-        txtTenKhachHang.setPreferredSize(new java.awt.Dimension(40, 29));
-        jPanel3.add(txtTenKhachHang);
-
-        jLabel5.setText("Ngay sinh");
-        jPanel3.add(jLabel5);
-
-        txtNgaySinh.setPreferredSize(new java.awt.Dimension(40, 29));
-        jPanel3.add(txtNgaySinh);
-
-        jLabel6.setText("Cmnd/Ho chieu:");
-        jPanel3.add(jLabel6);
-
-        txtCmnd.setPreferredSize(new java.awt.Dimension(40, 29));
-        jPanel3.add(txtCmnd);
-
-        jLabel7.setText("Gioi tinh:");
-        jPanel3.add(jLabel7);
-
-        cboGioiTinh.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nam", "Nu", " " }));
-        jPanel3.add(cboGioiTinh);
-
-        jLabel8.setText("Dia chi:");
-        jPanel3.add(jLabel8);
-
-        txtDiaChi.setPreferredSize(new java.awt.Dimension(40, 29));
-        jPanel3.add(txtDiaChi);
-
-        jLabel9.setText("So dien thoai:");
-        jPanel3.add(jLabel9);
-
-        txtSoDienThoai.setPreferredSize(new java.awt.Dimension(40, 29));
-        jPanel3.add(txtSoDienThoai);
-
-        jLabel10.setText("Emai[Neu co]:");
-        jPanel3.add(jLabel10);
-
-        txtEmail.setPreferredSize(new java.awt.Dimension(40, 29));
-        jPanel3.add(txtEmail);
-
-        jPanel2.add(jPanel3);
+        jPanel2.setLayout(null);
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Thong tin ve va chuyen bay"));
 
@@ -254,52 +184,61 @@ public class BanVeMB extends javax.swing.JInternalFrame {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, 778, Short.MAX_VALUE)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, 766, Short.MAX_VALUE))))
+                .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         jPanel2.add(jPanel4);
+        jPanel4.setBounds(40, 20, 800, 360);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 850, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(90, 90, 90)
+                                .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, 682, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(127, 127, 127)
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 590, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 107, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 392, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 386, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(14, 14, 14))
         );
 
         pack();
@@ -322,10 +261,8 @@ public class BanVeMB extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnBanVe;
     private javax.swing.JButton btnInVe;
     private javax.swing.JButton btnThoat;
-    private javax.swing.JComboBox<String> cboGioiTinh;
     private javax.swing.JComboBox<String> cboMaChuyenBay;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
@@ -335,19 +272,11 @@ public class BanVeMB extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
@@ -358,21 +287,14 @@ public class BanVeMB extends javax.swing.JInternalFrame {
     private javax.swing.JRadioButton rdoPhoThong;
     private javax.swing.JRadioButton rdoThuongGia;
     private javax.swing.JRadioButton rdoTreEm;
-    private javax.swing.JTextField txtCmnd;
-    private javax.swing.JTextField txtDiaChi;
     private javax.swing.JTextField txtDiemDen;
     private javax.swing.JTextField txtDiemDi;
-    private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtGiaVe;
     private javax.swing.JTextField txtGioBay;
     private javax.swing.JTextField txtGioiBan;
-    private javax.swing.JTextField txtMaKhachHang;
     private javax.swing.JTextField txtMaVe;
     private javax.swing.JTextField txtNgayBan;
     private javax.swing.JTextField txtNgayBay;
-    private javax.swing.JTextField txtNgaySinh;
     private javax.swing.JTextField txtNoiBan;
-    private javax.swing.JTextField txtSoDienThoai;
-    private javax.swing.JTextField txtTenKhachHang;
     // End of variables declaration//GEN-END:variables
 }

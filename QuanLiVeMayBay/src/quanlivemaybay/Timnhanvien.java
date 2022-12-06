@@ -124,68 +124,68 @@ public class Timnhanvien extends javax.swing.JFrame {
 
     private void btnttimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnttimActionPerformed
         // TODO add your handling code here:
-        if(txtma.getText().length()>0){
+        if (txtma.getText().length() > 0) {
             try {
-            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            Connection con = DriverManager.getConnection(url, name, pass);
-            String sql = "select * from nhanvien where Manv = ? ";
-            PreparedStatement st = con.prepareStatement(sql);
-            st.setString(1, txtma.getText());
-            ResultSet rs = st.executeQuery();
-            int find = -1;
-            tblmodel.setRowCount(0);
-            while (rs.next() == true) {
-                if (txtma.getText().equals(rs.getString(1))) {
-                    find = 0;
-                    Vector row = new Vector();
-                    row.add(rs.getString(1));
-                    row.add(rs.getString(2));
-                    tblmodel.addRow(row);
+                Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+                Connection con = DriverManager.getConnection(url, name, pass);
+                String sql = "select * from nhanvien where Manv = ? ";
+                PreparedStatement st = con.prepareStatement(sql);
+                st.setString(1, txtma.getText());
+                ResultSet rs = st.executeQuery();
+                int find = -1;
+                tblmodel.setRowCount(0);
+                while (rs.next() == true) {
+                    if (txtma.getText().equals(rs.getString(1))) {
+                        find = 0;
+                        Vector row = new Vector();
+                        row.add(rs.getString(1));
+                        row.add(rs.getString(2));
+                        tblmodel.addRow(row);
+                    }
                 }
-            }
-            if (find == 0) {
+                if (find == 0) {
 
-                JOptionPane.showMessageDialog(this, "da tim thay");
-            } else {
-                JOptionPane.showMessageDialog(this, "khong tim thay");
-            }
+                    JOptionPane.showMessageDialog(this, "da tim thay");
+                } else {
+                    JOptionPane.showMessageDialog(this, "khong tim thay");
+                }
 
-            con.close();
-        } catch (Exception e) {
-        }
-        }else if(txtten.getText().length()>0){
+                con.close();
+            } catch (Exception e) {
+            }
+        } else if (txtten.getText().length() > 0) {
             try {
-            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            Connection con = DriverManager.getConnection(url, name, pass);
-            String sql = "select * from nhanvien where Tennv = ? ";
-            PreparedStatement st = con.prepareStatement(sql);
-            st.setString(1, txtten.getText());
-            ResultSet rs = st.executeQuery();
-            int find = -1;
-            tblmodel.setRowCount(0);
-            while (rs.next() == true) {
-                if (txtten.getText().equals(rs.getString(2))) {
-                    find = 0;
-                    Vector row = new Vector();
-                    row.add(rs.getString(1));
-                    row.add(rs.getString(2));
-                    tblmodel.addRow(row);
+                Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+                Connection con = DriverManager.getConnection(url, name, pass);
+                String sql = "select * from nhanvien where Tennv = ? ";
+                PreparedStatement st = con.prepareStatement(sql);
+                st.setString(1, txtten.getText());
+                ResultSet rs = st.executeQuery();
+                int find = -1;
+                tblmodel.setRowCount(0);
+                while (rs.next() == true) {
+                    if (txtten.getText().equals(rs.getString(2))) {
+                        find = 0;
+                        Vector row = new Vector();
+                        row.add(rs.getString(1));
+                        row.add(rs.getString(2));
+                        tblmodel.addRow(row);
+                    }
                 }
-            }
-            if (find == 0) {
+                if (find == 0) {
 
-                JOptionPane.showMessageDialog(this, "da tim thay");
-            } else {
-                JOptionPane.showMessageDialog(this, "khong tim thay");
-            }
+                    JOptionPane.showMessageDialog(this, "da tim thay");
+                } else {
+                    JOptionPane.showMessageDialog(this, "khong tim thay");
+                }
 
-            con.close();
-        } catch (Exception e) {
-        }
-        }else{
+                con.close();
+            } catch (Exception e) {
+            }
+        } else {
             JOptionPane.showMessageDialog(this, "Vui lòng không để trống!");
         }
-       
+
     }//GEN-LAST:event_btnttimActionPerformed
 
     /**
@@ -222,7 +222,8 @@ public class Timnhanvien extends javax.swing.JFrame {
             }
         });
     }
-     public void initTable() {
+
+    public void initTable() {
         tblmodel = (DefaultTableModel) tblnhanvien.getModel();
         tblmodel.setColumnIdentifiers(new String[]{"Mã Nhân Viên", "Tên Nhân Viên"});
     }
@@ -239,8 +240,7 @@ public class Timnhanvien extends javax.swing.JFrame {
                 row.add(rs.getString(1));
                 row.add(rs.getString(2));
                 tblmodel.addRow(row);
-                
-               
+
             }
             tblnhanvien.setModel(tblmodel);
         } catch (Exception e) {

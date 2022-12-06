@@ -7,13 +7,13 @@ package quanlivemaybay;
 import java.awt.HeadlessException;
 import javax.swing.JOptionPane;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import quanlivemaybay.helper.DatabaseHelper;
+import static quanlivemaybay.helper.InsertData.LoadDataToArray;
 
 /**
  *
@@ -21,9 +21,6 @@ import quanlivemaybay.helper.DatabaseHelper;
  */
 public class main extends javax.swing.JFrame {
 
-    String user = "sa";
-    String passw = "123";
-    String url = "jdbc:sqlserver://localhost:1433;database=quanlimaybay;integratedSecurity=false;trustServerCertificate=true";
     Connection conn;
     PreparedStatement pst;
 
@@ -267,6 +264,7 @@ public class main extends javax.swing.JFrame {
 
         String usName = txtUserName.getText();
         String pass = txtPassWord.getText();
+        LoadDataToArray(usName);
         if (usName.isEmpty() || pass.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Username or Password blank");
             return;
@@ -275,8 +273,7 @@ public class main extends javax.swing.JFrame {
             return;
         } else {
             try {
-                Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-                conn = DriverManager.getConnection(url,user,passw);
+                conn = DatabaseHelper.openConnection();
                 pst = conn.prepareStatement("select * from Taikhoan where TenDangnhap = ?  and MatKhau =? and role =?");
                 String role = "";
                 if (rdoNV.isSelected()) {
@@ -307,7 +304,7 @@ public class main extends javax.swing.JFrame {
 
                     if (role.equals("NV")) {
                         JOptionPane.showMessageDialog(this, "Đăng nhập vào tài khoản nhân viên thành công!");
-                        StaffPage1 sp = new StaffPage1();
+                        StaffPage sp = new StaffPage();
                         this.hide();
                         sp.setVisible(true);
                         return;
@@ -321,12 +318,14 @@ public class main extends javax.swing.JFrame {
 
                 } else {
                     JOptionPane.showMessageDialog(this, "Username or pass do not match");
-                    txtUserName.setText("");
-                    txtPassWord.setText("");
+//                    txtUserName.setText("");
+//                    txtPassWord.setText("");
                     txtUserName.requestFocus();
                 }
             } catch (HeadlessException | ClassNotFoundException | SQLException e) {
                 System.out.println(e);
+            } catch (Exception ex) {
+                Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
             }
 
         }
@@ -342,8 +341,6 @@ public class main extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         DangKi l = new DangKi(this);
-        //        l.setLocation(460, 100);
-        //        m.jDesktopPane1.add(l);
         this.setVisible(false);
         l.setVisible(true);
 
