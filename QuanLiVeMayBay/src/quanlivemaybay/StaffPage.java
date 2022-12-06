@@ -11,7 +11,9 @@ import java.awt.event.WindowEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -41,6 +43,7 @@ public class StaffPage extends javax.swing.JFrame {
     String tenNV;
     int index = 0;
     DefaultTableModel dtmNhanVien = null;
+    boolean flag = false;
 
     /**
      * Creates new form StaffPage
@@ -49,6 +52,31 @@ public class StaffPage extends javax.swing.JFrame {
         initComponents();
         ss();
 
+    }
+
+    public void autoID() {
+
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            con = DriverManager.getConnection(url, user, pass);
+            Statement s = con.createStatement();
+            ResultSet rs = s.executeQuery("select MAX(MaKh) from taikhoan");
+            rs.next();
+            rs.getString(1);
+            if (rs.getString(1) == null) {
+                txtMaNV.setText("KH001");
+            } else {
+                long id = Long.parseLong(rs.getString(1).substring(2, rs.getString(1).length()));
+                id++;
+                txtMaNV.setText("KH" + String.format("%03d", id));
+
+            }
+
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DangKi.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(DangKi.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 //    public StaffPage1() {
@@ -152,7 +180,9 @@ public class StaffPage extends javax.swing.JFrame {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jToolBar2 = new javax.swing.JToolBar();
+        jButton4 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jDesktopPane2 = new javax.swing.JDesktopPane();
         jPanel2 = new javax.swing.JPanel();
         jToolBar1 = new javax.swing.JToolBar();
         jButton1 = new javax.swing.JButton();
@@ -199,6 +229,18 @@ public class StaffPage extends javax.swing.JFrame {
 
         jToolBar2.setRollover(true);
 
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/rsz_employee-card.png"))); // NOI18N
+        jButton4.setText("Tìm kiếm khách hàng");
+        jButton4.setFocusable(false);
+        jButton4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton4.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        jToolBar2.add(jButton4);
+
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/rsz_exit.png"))); // NOI18N
         jButton3.setText("Thoát");
         jButton3.setFocusable(false);
@@ -206,17 +248,30 @@ public class StaffPage extends javax.swing.JFrame {
         jButton3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar2.add(jButton3);
 
+        javax.swing.GroupLayout jDesktopPane2Layout = new javax.swing.GroupLayout(jDesktopPane2);
+        jDesktopPane2.setLayout(jDesktopPane2Layout);
+        jDesktopPane2Layout.setHorizontalGroup(
+            jDesktopPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jDesktopPane2Layout.setVerticalGroup(
+            jDesktopPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 580, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jToolBar2, javax.swing.GroupLayout.DEFAULT_SIZE, 900, Short.MAX_VALUE)
+            .addComponent(jDesktopPane2)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jToolBar2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 586, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jDesktopPane2))
         );
 
         jTabbedPane1.addTab("Danh mục điều khiển ", jPanel1);
@@ -341,7 +396,7 @@ public class StaffPage extends javax.swing.JFrame {
         jButton_ThemNhanVien.setBackground(new java.awt.Color(255, 121, 63));
         jButton_ThemNhanVien.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
         jButton_ThemNhanVien.setForeground(new java.awt.Color(255, 255, 255));
-        jButton_ThemNhanVien.setText("Thêm ");
+        jButton_ThemNhanVien.setText("Thêm mới");
         jButton_ThemNhanVien.setBorderPainted(false);
         jButton_ThemNhanVien.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -641,7 +696,41 @@ public class StaffPage extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton_XoaNhanVienActionPerformed
 
     private void jButton_ThemNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ThemNhanVienActionPerformed
-        // TODO add your handling code here:
+        if (flag == false) {
+            autoID();
+            txtTenNV.setText("");
+            txtUser.setText("");
+            txtMail.setText("");
+            txtPass.setText("");
+            txtSDT.setText("");
+            flag = true;
+            jButton_ThemNhanVien.setText("Lưu");
+        } else {
+            String maKH = txtMaNV.getText();
+            String tenKH = txtTenNV.getText();
+            String soDT = txtSDT.getText();
+            String gioiTinh = cboGT.getSelectedItem().toString();
+            String email = txtMail.getText();
+            String tenDN = txtUser.getText();
+            String passw = txtPass.getText();
+            String role = cboRole.getSelectedItem().toString();
+
+            User users = new User(maKH, tenKH, soDT, gioiTinh, email, tenDN, passw, role);
+            try {
+                InsertData.insertTaiKhoan(users, 'i');
+                Controler.arrayListTaiKhoan.add(users);
+                loadBangNhanVien();
+
+            } catch (ClassNotFoundException | SQLException ex) {
+                Logger.getLogger(DangKi.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (Exception ex) {
+                Logger.getLogger(DangKi.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            jButton_ThemNhanVien.setText("Thêm mới");
+            flag = false;
+
+        }
 
     }//GEN-LAST:event_jButton_ThemNhanVienActionPerformed
 
@@ -690,6 +779,13 @@ public class StaffPage extends javax.swing.JFrame {
         d.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        TkKH t = new TkKH();
+        jDesktopPane2.add(t);
+        t.setVisible(true);
+
+    }//GEN-LAST:event_jButton4ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -734,12 +830,14 @@ public class StaffPage extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton_KhoiPhucMK;
     private javax.swing.JButton jButton_QuayLai;
     private javax.swing.JButton jButton_SuaNhanVien;
     private javax.swing.JButton jButton_ThemNhanVien;
     private javax.swing.JButton jButton_XoaNhanVien;
     private javax.swing.JDesktopPane jDesktopPane1;
+    private javax.swing.JDesktopPane jDesktopPane2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

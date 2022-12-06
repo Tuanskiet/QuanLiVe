@@ -5,7 +5,6 @@
 package quanlivemaybay;
 
 import quanlivemaybay.model.Datvemain;
-import java.awt.List;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -14,7 +13,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Vector;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -25,7 +23,7 @@ public class DatVe extends javax.swing.JFrame {
 
     String name = "sa";
     String pass = "123";
-    String url = "jdbc:sqlserver://localhost:1111;database=quanlimaybay;integratedSecurity=false;trustServerCertificate=true";
+    String url = "jdbc:sqlserver://localhost:1433;database=quanlimaybay;integratedSecurity=false;trustServerCertificate=true";
     DefaultTableModel tblmodel = null;
     Vector row = null;
     int index = 0;
@@ -283,7 +281,6 @@ public class DatVe extends javax.swing.JFrame {
                 }
             }
             if (find == 0) {
-
                 JOptionPane.showMessageDialog(this, "da tim thay");
             } else {
                 JOptionPane.showMessageDialog(this, "khong tim thay");

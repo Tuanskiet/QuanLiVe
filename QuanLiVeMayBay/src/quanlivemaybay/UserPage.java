@@ -33,7 +33,6 @@ public class UserPage extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jToolBar2 = new javax.swing.JToolBar();
         jButton4 = new javax.swing.JButton();
-        jButton9 = new javax.swing.JButton();
         jButton10 = new javax.swing.JButton();
         jButton11 = new javax.swing.JButton();
         jDesktopPane2 = new javax.swing.JDesktopPane();
@@ -68,13 +67,6 @@ public class UserPage extends javax.swing.JFrame {
         jButton4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton4.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar2.add(jButton4);
-
-        jButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/rsz_money.png"))); // NOI18N
-        jButton9.setText("Khuyến mãi");
-        jButton9.setFocusable(false);
-        jButton9.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton9.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar2.add(jButton9);
 
         jButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/rsz_employee-card.png"))); // NOI18N
         jButton10.setText("Hồ sơ");
@@ -119,9 +111,8 @@ public class UserPage extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jToolBar2, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jDesktopPane2)
-                .addContainerGap())
+                .addGap(18, 18, 18)
+                .addComponent(jDesktopPane2))
         );
 
         tblhethong.addTab("Hệ thống", jPanel2);
@@ -234,7 +225,7 @@ public class UserPage extends javax.swing.JFrame {
 
     private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
        DatVe d = new DatVe();
-       jDesktopPane1.add(d);
+//       jDesktopPane1.add(d);
        d.setVisible(true);
     }//GEN-LAST:event_jButton13ActionPerformed
 
@@ -286,7 +277,6 @@ public class UserPage extends javax.swing.JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JDesktopPane jDesktopPane2;
     private javax.swing.JPanel jPanel1;
