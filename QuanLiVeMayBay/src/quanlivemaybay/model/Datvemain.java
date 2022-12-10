@@ -9,49 +9,42 @@ package quanlivemaybay.model;
  * @author ADMIN
  */
 public class Datvemain {
-    private String Diemden,diemkhoihanh,ngaybay,giobay;
-
-    public Datvemain(String Diemden, String diemkhoihanh, String ngaybay, String giobay) {
-        this.Diemden = Diemden;
-        this.diemkhoihanh = diemkhoihanh;
-        this.ngaybay = ngaybay;
-        this.giobay = giobay;
-    }
+    private String maVe,maKH,ngayDat;
 
     public Datvemain() {
     }
 
-    public String getDiemden() {
-        return Diemden;
+    public Datvemain(String maVe, String maKH, String ngayDat) {
+        this.maVe = maVe;
+        this.maKH = maKH;
+        this.ngayDat = ngayDat;
+    }
+    
+
+    public String getMaVe() {
+        return maVe;
     }
 
-    public void setDiemden(String Diemden) {
-        this.Diemden = Diemden;
+    public void setMaVe(String maVe) {
+        this.maVe = maVe;
     }
 
-    public String getDiemkhoihanh() {
-        return diemkhoihanh;
+    public String getMaKH() {
+        return maKH;
     }
 
-    public void setDiemkhoihanh(String diemkhoihanh) {
-        this.diemkhoihanh = diemkhoihanh;
+    public void setMaKH(String maKH) {
+        this.maKH = maKH;
     }
 
-    public String getNgaybay() {
-        return ngaybay;
+    public String getNgayDat() {
+        return ngayDat;
     }
 
-    public void setNgaybay(String ngaybay) {
-        this.ngaybay = ngaybay;
+    public void setNgayDat(String ngayDat) {
+        this.ngayDat = ngayDat;
     }
 
-    public String getGiobay() {
-        return giobay;
-    }
-
-    public void setGiobay(String giobay) {
-        this.giobay = giobay;
-    }
     
     
 }
