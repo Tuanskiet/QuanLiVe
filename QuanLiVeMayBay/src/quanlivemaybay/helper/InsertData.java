@@ -88,20 +88,45 @@ public class InsertData {
             System.out.println(ex);
         }
     }
-    
-      public static void insertVe(VeMayBay ve) {
-      String sqlCommand = "INSERT INTO Ve VALUES (?,?,?,?,?,?,?,?)";
+
+    public static void LoadDataVe() {
+        try {
+            Connection conn = DatabaseHelper.openConnection();
+            Statement st = conn.createStatement();
+            String sql = "SELECT * FROM Ve";
+            ResultSet rs = st.executeQuery(sql);
+            Controler.arrayListVe.clear();
+            while (rs.next()) {
+                String MaVe = rs.getString(1);
+                String Diemdi = rs.getString(2);
+                String Diemden = rs.getString(3);
+                String LoaiVe = rs.getString(4);
+                String GioBay = rs.getString(5);
+                String NgayBay = String.valueOf(rs.getDate(6));
+                String NgayBan = String.valueOf(rs.getDate(7));
+                String giaVe = rs.getString(8);
+                VeMayBay ve = new VeMayBay(MaVe, Diemdi, Diemden, LoaiVe, GioBay, NgayBay, NgayBan, Float.parseFloat(giaVe));
+                Controler.arrayListVe.add(ve);
+            }
+            conn.close();
+        } catch (Exception ex) {
+            System.out.println(ex);
+        }
+    }
+
+    public static void insertVe(VeMayBay ve) {
+        String sqlCommand = "INSERT INTO Ve VALUES (?,?,?,?,?,?,?,?)";
         try {
             Connection con = DatabaseHelper.openConnection();
             PreparedStatement ps = con.prepareStatement(sqlCommand);
             ps.setString(1, ve.getMaVe());
-            ps.setString(2,ve.getDiemdi());
-            ps.setString(3,ve.getDiemden());
-            ps.setString(4,ve.getLoaiVe());
-            ps.setString(5,ve.getGioBay());
-            ps.setString(6,String.valueOf(ve.getNgayBay()));
-            ps.setString(7,String.valueOf(ve.getNgayBan()));
-            ps.setString(8,String.valueOf(ve.getGiaVe()));
+            ps.setString(2, ve.getDiemdi());
+            ps.setString(3, ve.getDiemden());
+            ps.setString(4, ve.getLoaiVe());
+            ps.setString(5, ve.getGioBay());
+            ps.setString(6, String.valueOf(ve.getNgayBay()));
+            ps.setString(7, String.valueOf(ve.getNgayBan()));
+            ps.setString(8, String.valueOf(ve.getGiaVe()));
 
             ps.execute();
 
@@ -109,5 +134,5 @@ public class InsertData {
         } catch (Exception ex) {
             System.out.println(ex);
         }
-      }
+    }
 }

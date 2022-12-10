@@ -5,7 +5,6 @@
 package quanlivemaybay;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,6 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import quanlivemaybay.helper.DatabaseHelper;
 import quanlivemaybay.helper.InsertData;
 import quanlivemaybay.model.Controler;
 import quanlivemaybay.model.User;
@@ -52,8 +52,7 @@ public class DangKi extends javax.swing.JFrame {
     public void autoID() {
 
         try {
-            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            conn = DriverManager.getConnection(url, user, pass);
+            conn = DatabaseHelper.openConnection();
             Statement s = conn.createStatement();
             ResultSet rs = s.executeQuery("select MAX(MaKh) from taikhoan");
             rs.next();
@@ -70,6 +69,8 @@ public class DangKi extends javax.swing.JFrame {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(DangKi.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
+            Logger.getLogger(DangKi.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
             Logger.getLogger(DangKi.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

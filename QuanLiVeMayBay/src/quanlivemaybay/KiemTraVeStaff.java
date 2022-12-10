@@ -4,17 +4,49 @@
  */
 package quanlivemaybay;
 
+import java.util.Date;
+import javax.swing.table.DefaultTableModel;
+import quanlivemaybay.helper.InsertData;
+import quanlivemaybay.model.Controler;
+
 /**
  *
  * @author FPT
  */
 public class KiemTraVeStaff extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form KiemTraVeStaff
-     */
+    DefaultTableModel dtmVe;
+
     public KiemTraVeStaff() {
         initComponents();
+        jdcTuNgay.setDate(new Date(System.currentTimeMillis()));
+        jdcDenNgay.setDate(new Date(System.currentTimeMillis()));
+        InsertData.LoadDataVe();
+        loadTable();
+        loadComboBox();
+
+    }
+
+    public void loadComboBox() {
+        for (VeMayBay ve : Controler.arrayListVe) {
+            cboDiemDi.addItem(ve.getDiemdi());
+            cboDiemDen.addItem(ve.getDiemden());
+        }
+
+    }
+
+    public void loadTable() {
+        dtmVe = (DefaultTableModel) tblVe.getModel();
+        while (dtmVe.getRowCount() > 0) {
+            dtmVe.removeRow(0);
+        }
+
+        for (VeMayBay ve : Controler.arrayListVe) {
+            dtmVe.addRow(new Object[]{ve.getMaVe(), ve.getDiemdi(), 
+                ve.getDiemden(), ve.getLoaiVe(), ve.getGioBay(), ve.getNgayBay(), 
+                ve.getNgayBan(), ve.getGiaVe()});
+        }
+        dtmVe.fireTableDataChanged();
     }
 
     /**
@@ -31,16 +63,16 @@ public class KiemTraVeStaff extends javax.swing.JInternalFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox();
+        cboDiemDi = new javax.swing.JComboBox();
         jLabel4 = new javax.swing.JLabel();
-        jComboBox3 = new javax.swing.JComboBox();
+        cboDiemDen = new javax.swing.JComboBox();
         jLabel5 = new javax.swing.JLabel();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
-        jDateChooser2 = new com.toedter.calendar.JDateChooser();
+        jdcTuNgay = new com.toedter.calendar.JDateChooser();
+        jdcDenNgay = new com.toedter.calendar.JDateChooser();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblTable = new javax.swing.JTable();
+        tblVe = new javax.swing.JTable();
 
         setPreferredSize(new java.awt.Dimension(900, 568));
 
@@ -50,14 +82,14 @@ public class KiemTraVeStaff extends javax.swing.JInternalFrame {
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setText("Từ ngày:");
 
-        jComboBox1.setBackground(new java.awt.Color(153, 153, 153));
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Hà Nội", "Hải Phòng", "Nghệ An" }));
+        cboDiemDi.setBackground(new java.awt.Color(153, 153, 153));
+        cboDiemDi.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Hà Nội", "Hải Phòng", "Nghệ An" }));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setText("Điểm đến:");
 
-        jComboBox3.setBackground(new java.awt.Color(153, 153, 153));
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Sài Gòn", "Lâm Đồng", "Vũng Tàu" }));
+        cboDiemDen.setBackground(new java.awt.Color(153, 153, 153));
+        cboDiemDen.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Sài Gòn", "Lâm Đồng", "Vũng Tàu" }));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setText("Đến ngày:");
@@ -73,16 +105,16 @@ public class KiemTraVeStaff extends javax.swing.JInternalFrame {
                     .addComponent(jLabel3))
                 .addGap(47, 47, 47)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jComboBox1, 0, 175, Short.MAX_VALUE)
-                    .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(cboDiemDi, 0, 175, Short.MAX_VALUE)
+                    .addComponent(jdcTuNgay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(101, 101, 101)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jComboBox3, 0, 175, Short.MAX_VALUE)
-                    .addComponent(jDateChooser2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(cboDiemDen, 0, 175, Short.MAX_VALUE)
+                    .addComponent(jdcDenNgay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(28, 28, 28))
         );
         jPanel2Layout.setVerticalGroup(
@@ -91,15 +123,15 @@ public class KiemTraVeStaff extends javax.swing.JInternalFrame {
                 .addGap(16, 16, 16)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cboDiemDi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4)
-                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cboDiemDen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
+                    .addComponent(jdcTuNgay, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
                     .addComponent(jLabel5)
                     .addComponent(jLabel3)
-                    .addComponent(jDateChooser2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jdcDenNgay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 28, Short.MAX_VALUE))
         );
 
@@ -116,18 +148,23 @@ public class KiemTraVeStaff extends javax.swing.JInternalFrame {
             }
         });
 
-        tblTable.setModel(new javax.swing.table.DefaultTableModel(
+        tblVe.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Mã vé", "Điểm đi", "Điểm đến", "Loại vé", "Giờ bay", "Ngày bay", "Ngày bán", "Giá vé"
             }
-        ));
-        jScrollPane1.setViewportView(tblTable);
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Float.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tblVe);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -181,17 +218,15 @@ public class KiemTraVeStaff extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-         this.hide();
+        this.hide();
     }//GEN-LAST:event_jButton3ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox cboDiemDen;
+    private javax.swing.JComboBox cboDiemDi;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JComboBox jComboBox1;
-    private javax.swing.JComboBox jComboBox3;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
-    private com.toedter.calendar.JDateChooser jDateChooser2;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -200,6 +235,8 @@ public class KiemTraVeStaff extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable tblTable;
+    private com.toedter.calendar.JDateChooser jdcDenNgay;
+    private com.toedter.calendar.JDateChooser jdcTuNgay;
+    private javax.swing.JTable tblVe;
     // End of variables declaration//GEN-END:variables
 }
