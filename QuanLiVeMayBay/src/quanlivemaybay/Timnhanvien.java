@@ -144,7 +144,6 @@ public class Timnhanvien extends javax.swing.JFrame {
                     }
                 }
                 if (find == 0) {
-
                     JOptionPane.showMessageDialog(this, "da tim thay");
                 } else {
                     JOptionPane.showMessageDialog(this, "khong tim thay");

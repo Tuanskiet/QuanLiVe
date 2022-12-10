@@ -34,7 +34,7 @@
                       <EmptySpace min="46" pref="46" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="txtMatKhauMoi" max="32767" attributes="0"/>
-                          <Component id="txtNhapLaiMK" pref="184" max="32767" attributes="0"/>
+                          <Component id="txtNhapLaiMK" pref="183" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" attributes="0">
@@ -73,12 +73,12 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Nhap mat khau moi : "/>
+        <Property name="text" type="java.lang.String" value="Nh&#x1ead;p m&#x1ead;t kh&#x1ea9;u m&#x1edb;i : "/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Nhap lai mat khau : "/>
+        <Property name="text" type="java.lang.String" value="Nh&#x1ead;p l&#x1ea1;i m&#xe2;t kh&#x1ea9;u : "/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btnOK">
