@@ -217,7 +217,6 @@ public class main extends javax.swing.JFrame {
         );
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/Logo_FPT_Polytechnic XOA POHNG.png"))); // NOI18N
-        jLabel6.setText("jLabel6");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

@@ -46,6 +46,7 @@ public class DangKi extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setDefaultCloseOperation(this.DISPOSE_ON_CLOSE);
         this.jFrame = jFrame;
+        autoID();
     }
 
     public void autoID() {
@@ -255,24 +256,9 @@ public class DangKi extends javax.swing.JFrame {
         String passw = txtPass.getText();
         String passNL = txtPassNL.getText();
         if (passw.equals(passNL)) {
-            User users = new User(maKH, tenKH, soDT, gioiTinh, email, tenDN, passw, soDT);
+            User users = new User(maKH, tenKH, soDT, gioiTinh, email, tenDN, passw, "KH");
             try {
-//                Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-//                conn = DriverManager.getConnection(url, user, pass);
-//                pst = conn.prepareStatement("insert into Taikhoan values (?,?,?,?,?,?,?,?)");
-//                pst.setString(1, maKH);
-//                pst.setString(2, tenKH);
-//                pst.setString(3, soDT);
-//                pst.setString(4, gioiTinh);
-//                pst.setString(5, email);
-//                pst.setString(6, tenDN);
-//                pst.setString(7, passw);
-//                pst.setString(8, "KH");
-//
-//                pst.executeUpdate();
                 InsertData.insertTaiKhoan(users, 'i');
-
-//                JOptionPane.showMessageDialog(this, "Tao thanh cong!");
                 Controler.arrayListTaiKhoan.add(users);
                 resetForm();
                 main m = new main();
@@ -303,7 +289,6 @@ public class DangKi extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-//        DangKi l = new DangKi(this);
         this.setVisible(false);
         jFrame.setVisible(true);
 

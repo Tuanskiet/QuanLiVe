@@ -11,5 +11,8 @@ import java.util.ArrayList;
  * @author Administrator
  */
 public class Controler {
-    public static ArrayList<User> arrayListTaiKhoan = new ArrayList<User>();
+
+    public static ArrayList<User> arrayListTaiKhoan = new ArrayList<>();
+    public static ArrayList<VeMayBay> arrayListVe = new ArrayList<>();
+
 }

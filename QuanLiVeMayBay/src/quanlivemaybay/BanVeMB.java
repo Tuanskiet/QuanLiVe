@@ -4,6 +4,15 @@
  */
 package quanlivemaybay;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import quanlivemaybay.helper.DatabaseHelper;
+import quanlivemaybay.model.Controler;
+import quanlivemaybay.model.VeMayBay;
+
 /**
  *
  * @author FPT
@@ -15,6 +24,36 @@ public class BanVeMB extends javax.swing.JInternalFrame {
      */
     public BanVeMB() {
         initComponents();
+        autoID();
+    }
+
+    public void autoID() {
+        try {
+            java.sql.Connection con = DatabaseHelper.openConnection();
+            Statement s = con.createStatement();
+            ResultSet rs = s.executeQuery("select MAX(MaVe) from Ve");
+            rs.next();
+            rs.getString(1);
+            if (rs.getString(1) == null) {
+                txtMaVe.setText("VS001");
+            } else {
+                long id = Long.parseLong(rs.getString(1).substring(2, rs.getString(1).length()));
+                id++;
+                txtMaVe.setText("VS" + String.format("%03d", id));
+
+            }
+
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DangKi.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(DangKi.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(BanVeMB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void resetForm() {
+
     }
 
     /**
@@ -26,9 +65,9 @@ public class BanVeMB extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        grLoaiVe = new javax.swing.ButtonGroup();
         jPanel11 = new javax.swing.JPanel();
         btnBanVe = new javax.swing.JButton();
-        btnInVe = new javax.swing.JButton();
         btnThoat = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -42,8 +81,6 @@ public class BanVeMB extends javax.swing.JInternalFrame {
         jPanel6 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         txtMaVe = new javax.swing.JTextField();
-        jLabel11 = new javax.swing.JLabel();
-        cboMaChuyenBay = new javax.swing.JComboBox<>();
         jPanel7 = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
         rdoThuongGia = new javax.swing.JRadioButton();
@@ -55,15 +92,11 @@ public class BanVeMB extends javax.swing.JInternalFrame {
         jLabel17 = new javax.swing.JLabel();
         txtGioBay = new javax.swing.JTextField();
         jLabel18 = new javax.swing.JLabel();
-        txtNgayBay = new javax.swing.JTextField();
-        jLabel14 = new javax.swing.JLabel();
-        txtGioiBan = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
-        txtNgayBan = new javax.swing.JTextField();
-        jLabel16 = new javax.swing.JLabel();
-        txtNoiBan = new javax.swing.JTextField();
         jLabel19 = new javax.swing.JLabel();
         txtGiaVe = new javax.swing.JTextField();
+        jdcNgayBay = new com.toedter.calendar.JDateChooser();
+        jdcNgayBan = new com.toedter.calendar.JDateChooser();
 
         setPreferredSize(new java.awt.Dimension(900, 568));
 
@@ -77,10 +110,6 @@ public class BanVeMB extends javax.swing.JInternalFrame {
             }
         });
         jPanel11.add(btnBanVe);
-
-        btnInVe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/rsz_cash-machine.png"))); // NOI18N
-        btnInVe.setText("In vé");
-        jPanel11.add(btnInVe);
 
         btnThoat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/rsz_exit.png"))); // NOI18N
         btnThoat.setText("Thoát");
@@ -112,17 +141,13 @@ public class BanVeMB extends javax.swing.JInternalFrame {
         jPanel5.add(jLabel12);
         jPanel5.add(txtDiemDen);
 
-        jPanel6.setLayout(new java.awt.GridLayout(2, 2, 20, 20));
+        jPanel6.setLayout(new java.awt.GridLayout(1, 1, 20, 20));
 
         jLabel3.setText("Ma ve:");
         jPanel6.add(jLabel3);
+
+        txtMaVe.setEditable(false);
         jPanel6.add(txtMaVe);
-
-        jLabel11.setText("Ma chuyen bay:");
-        jPanel6.add(jLabel11);
-
-        cboMaChuyenBay.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "PS", "Pk", "PD", "PH" }));
-        jPanel6.add(cboMaChuyenBay);
 
         jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder("Loai ve"));
         jPanel7.setLayout(new java.awt.GridLayout(1, 2, 20, 20));
@@ -130,9 +155,11 @@ public class BanVeMB extends javax.swing.JInternalFrame {
         jPanel8.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel8.setLayout(new java.awt.GridLayout(1, 2, 20, 16));
 
+        grLoaiVe.add(rdoThuongGia);
         rdoThuongGia.setText("Thuong gia");
         jPanel8.add(rdoThuongGia);
 
+        grLoaiVe.add(rdoPhoThong);
         rdoPhoThong.setText("Pho thong");
         jPanel8.add(rdoPhoThong);
 
@@ -141,9 +168,11 @@ public class BanVeMB extends javax.swing.JInternalFrame {
         jPanel9.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel9.setLayout(new java.awt.GridLayout(1, 2, 20, 20));
 
+        grLoaiVe.add(rdoNguoiLon);
         rdoNguoiLon.setText("Nguoi lon");
         jPanel9.add(rdoNguoiLon);
 
+        grLoaiVe.add(rdoTreEm);
         rdoTreEm.setText("Tre em");
         rdoTreEm.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -154,31 +183,31 @@ public class BanVeMB extends javax.swing.JInternalFrame {
 
         jPanel7.add(jPanel9);
 
-        jPanel10.setLayout(new java.awt.GridLayout(3, 4, 20, 20));
+        jPanel10.setLayout(null);
 
         jLabel17.setText("Gio bay:");
         jPanel10.add(jLabel17);
+        jLabel17.setBounds(0, 60, 176, 29);
         jPanel10.add(txtGioBay);
+        txtGioBay.setBounds(200, 60, 176, 29);
 
         jLabel18.setText("Ngay bay:");
         jPanel10.add(jLabel18);
-        jPanel10.add(txtNgayBay);
-
-        jLabel14.setText("Gio ban:");
-        jPanel10.add(jLabel14);
-        jPanel10.add(txtGioiBan);
+        jLabel18.setBounds(0, 0, 176, 29);
 
         jLabel15.setText("Ngay ban:");
         jPanel10.add(jLabel15);
-        jPanel10.add(txtNgayBan);
-
-        jLabel16.setText("Noi ban:");
-        jPanel10.add(jLabel16);
-        jPanel10.add(txtNoiBan);
+        jLabel15.setBounds(390, 10, 176, 29);
 
         jLabel19.setText("Gia ve:");
         jPanel10.add(jLabel19);
+        jLabel19.setBounds(390, 60, 176, 29);
         jPanel10.add(txtGiaVe);
+        txtGiaVe.setBounds(590, 60, 170, 29);
+        jPanel10.add(jdcNgayBay);
+        jdcNgayBay.setBounds(200, 10, 170, 30);
+        jPanel10.add(jdcNgayBan);
+        jdcNgayBan.setBounds(590, 0, 170, 30);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -199,18 +228,18 @@ public class BanVeMB extends javax.swing.JInternalFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         jPanel2.add(jPanel4);
-        jPanel4.setBounds(40, 20, 800, 360);
+        jPanel4.setBounds(40, 20, 800, 350);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -249,7 +278,24 @@ public class BanVeMB extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_rdoTreEmActionPerformed
 
     private void btnBanVeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBanVeActionPerformed
-        // TODO add your handling code here:
+
+        String maVe = txtMaVe.getText();
+        String diemDi = txtDiemDi.getText();
+        String diemDen = txtDiemDen.getText();
+        String loaiVe = grLoaiVe.getSelection().toString();
+        String gioBay = txtGioBay.getText();
+        String ngayBay = jdcNgayBay.getDateFormatString();
+        String ngayBan = jdcNgayBan.getDateFormatString();
+        float giaVe = Float.parseFloat(txtGiaVe.getText());
+        VeMayBay ve = new VeMayBay(maVe, diemDi, diemDen, loaiVe, gioBay, ngayBay, ngayBan, giaVe);
+
+//        InsertData.insertVe(ve);
+        Controler.arrayListVe.add(ve);
+        resetForm();
+
+        Controler.arrayListVe.stream().forEach(System.out::println);
+
+
     }//GEN-LAST:event_btnBanVeActionPerformed
 
     private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
@@ -259,16 +305,12 @@ public class BanVeMB extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBanVe;
-    private javax.swing.JButton btnInVe;
     private javax.swing.JButton btnThoat;
-    private javax.swing.JComboBox<String> cboMaChuyenBay;
+    private javax.swing.ButtonGroup grLoaiVe;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
@@ -283,6 +325,8 @@ public class BanVeMB extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
+    private com.toedter.calendar.JDateChooser jdcNgayBan;
+    private com.toedter.calendar.JDateChooser jdcNgayBay;
     private javax.swing.JRadioButton rdoNguoiLon;
     private javax.swing.JRadioButton rdoPhoThong;
     private javax.swing.JRadioButton rdoThuongGia;
@@ -291,10 +335,6 @@ public class BanVeMB extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtDiemDi;
     private javax.swing.JTextField txtGiaVe;
     private javax.swing.JTextField txtGioBay;
-    private javax.swing.JTextField txtGioiBan;
     private javax.swing.JTextField txtMaVe;
-    private javax.swing.JTextField txtNgayBan;
-    private javax.swing.JTextField txtNgayBay;
-    private javax.swing.JTextField txtNoiBan;
     // End of variables declaration//GEN-END:variables
 }
