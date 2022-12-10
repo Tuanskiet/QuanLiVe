@@ -336,6 +336,8 @@ public class main extends javax.swing.JFrame {
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         txtPassWord.setText("");
         txtUserName.setText("");
+        chkNhoMK.setSelected(false);
+        rdoKH.setSelected(true);
 
     }//GEN-LAST:event_btnCancelActionPerformed
 
@@ -366,9 +368,16 @@ public class main extends javax.swing.JFrame {
             PreparedStatement ps = con.prepareStatement("select * from Taikhoan where TenDangnhap = ? ");
             ps.setString(1, txtUserName.getText());
             ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
+            while (rs.next() && rs.getBoolean(9) == true) {
                 txtPassWord.setText(rs.getString(7));
                 chkNhoMK.setSelected(true);
+                if (rs.getString(8).equals("KH")) {
+                    rdoKH.setSelected(true);
+                    rdoNV.setSelected(false);
+                } else {
+                    rdoKH.setSelected(false);
+                    rdoNV.setSelected(true);
+                }
             }
         } catch (Exception ex) {
             Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
