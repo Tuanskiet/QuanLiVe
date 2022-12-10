@@ -4,6 +4,7 @@
  */
 package quanlivemaybay.model;
 
+import quanlivemaybay.VeMayBay;
 import java.util.ArrayList;
 
 /**

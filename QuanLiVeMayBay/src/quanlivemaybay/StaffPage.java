@@ -791,8 +791,8 @@ public class StaffPage extends javax.swing.JFrame {
                 JOptionPane.YES_NO_OPTION);
 
         if (confirmed == JOptionPane.YES_OPTION) {
-            main m = new main();
-            m.setVisible(true);
+//            main m = new main();
+//            m.setVisible(true);
             this.setVisible(false);
         } else {
             setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);

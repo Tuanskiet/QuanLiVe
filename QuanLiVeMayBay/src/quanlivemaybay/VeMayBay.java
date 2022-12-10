@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package quanlivemaybay.model;
+package quanlivemaybay;
 
 /**
  *
@@ -33,11 +33,11 @@ public class VeMayBay {
         this.GiaVe = GiaVe;
     }
 
-    
+   
+
     /**
      * @return the MaVe
      */
-    
     public String getMaVe() {
         return MaVe;
     }
@@ -146,5 +146,7 @@ public class VeMayBay {
     public void setGiaVe(float GiaVe) {
         this.GiaVe = GiaVe;
     }
+
+    
     
 }

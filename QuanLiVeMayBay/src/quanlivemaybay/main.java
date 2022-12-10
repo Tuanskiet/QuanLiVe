@@ -317,8 +317,6 @@ public class main extends javax.swing.JFrame {
 
                 } else {
                     JOptionPane.showMessageDialog(this, "Username or pass do not match");
-//                    txtUserName.setText("");
-//                    txtPassWord.setText("");
                     txtUserName.requestFocus();
                 }
             } catch (HeadlessException | ClassNotFoundException | SQLException e) {

@@ -8,7 +8,7 @@ import quanlivemaybay.model.User;
 import java.sql.*;
 import javax.swing.JOptionPane;
 import quanlivemaybay.model.Controler;
-import quanlivemaybay.model.VeMayBay;
+import quanlivemaybay.VeMayBay;
 
 /**
  *
@@ -99,8 +99,8 @@ public class InsertData {
             ps.setString(3,ve.getDiemden());
             ps.setString(4,ve.getLoaiVe());
             ps.setString(5,ve.getGioBay());
-            ps.setString(6,ve.getNgayBay());
-            ps.setString(7,ve.getNgayBan());
+            ps.setString(6,String.valueOf(ve.getNgayBay()));
+            ps.setString(7,String.valueOf(ve.getNgayBan()));
             ps.setString(8,String.valueOf(ve.getGiaVe()));
 
             ps.execute();
