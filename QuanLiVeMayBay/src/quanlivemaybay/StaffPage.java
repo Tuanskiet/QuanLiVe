@@ -5,8 +5,6 @@
 package quanlivemaybay;
 
 import java.awt.Cursor;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -17,7 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import static javax.swing.JFrame.EXIT_ON_CLOSE;
 import javax.swing.JOptionPane;
 import static javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE;
 import javax.swing.table.DefaultTableModel;
@@ -50,6 +47,8 @@ public class StaffPage extends javax.swing.JFrame {
      */
     public StaffPage() {
         initComponents();
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         ss();
 
     }
@@ -57,8 +56,7 @@ public class StaffPage extends javax.swing.JFrame {
     public void autoID() {
 
         try {
-            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            con = DriverManager.getConnection(url, user, pass);
+            con = DatabaseHelper.openConnection();
             Statement s = con.createStatement();
             ResultSet rs = s.executeQuery("select MAX(MaKh) from taikhoan");
             rs.next();
@@ -72,10 +70,10 @@ public class StaffPage extends javax.swing.JFrame {
 
             }
 
-        } catch (ClassNotFoundException ex) {
+        } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(DangKi.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(DangKi.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(StaffPage.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -96,23 +94,6 @@ public class StaffPage extends javax.swing.JFrame {
         });
         loadBangNhanVien();
 
-        this.addWindowListener(new WindowAdapter() {
-            public void windowClosing(WindowEvent e) {
-                int confirmed = JOptionPane.showConfirmDialog(null,
-                        "Bạn có chắc muốn thoát chương trình không?", "Xác nhận",
-                        JOptionPane.YES_NO_OPTION);
-
-                if (confirmed == JOptionPane.YES_OPTION) {
-                    dispose();
-                    main m =   new main();
-                    m.setVisible(true);
-                    
-                } else {
-                    setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-                }
-            }
-        });
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
     }
 
@@ -225,6 +206,14 @@ public class StaffPage extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jToolBar1.setRollover(true);
 
@@ -790,6 +779,25 @@ public class StaffPage extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Vui lòng không để trống!");
         }
     }//GEN-LAST:event_btnFindActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+
+
+    }//GEN-LAST:event_formWindowClosed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        int confirmed = JOptionPane.showConfirmDialog(null,
+                "Bạn có chắc muốn thoát chương trình không?", "Xác nhận",
+                JOptionPane.YES_NO_OPTION);
+
+        if (confirmed == JOptionPane.YES_OPTION) {
+            main m = new main();
+            m.setVisible(true);
+            this.setVisible(false);
+        } else {
+            setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        }
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments

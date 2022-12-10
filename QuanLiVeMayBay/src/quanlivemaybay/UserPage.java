@@ -4,8 +4,6 @@
  */
 package quanlivemaybay;
 
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.sql.Connection;
 import quanlivemaybay.model.Datvemain;
 import java.sql.DriverManager;
@@ -39,25 +37,12 @@ public class UserPage extends javax.swing.JFrame {
     public UserPage() {
         initComponents();
         setLocationRelativeTo(null);
+        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+
         initTable();
         loaddata();
 
-        this.addWindowListener(new WindowAdapter() {
-            public void windowClosing(WindowEvent e) {
-                int confirmed = JOptionPane.showConfirmDialog(null,
-                        "Bạn có chắc muốn thoát chương trình không?", "Xác nhận",
-                        JOptionPane.YES_NO_OPTION);
-
-                if (confirmed == JOptionPane.YES_OPTION) {
-                    dispose();
-                    main m = new main();
-                    m.setVisible(true);
-
-                } else {
-                    setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-                }
-            }
-        });
+        
     }
 
     private void getListTable() {
@@ -187,6 +172,11 @@ public class UserPage extends javax.swing.JFrame {
         jMenu1.setText("jMenu1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         btnlammoi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/rsz_repeat.png"))); // NOI18N
         btnlammoi.setText("Làm mới ");
@@ -763,6 +753,20 @@ public class UserPage extends javax.swing.JFrame {
     private void txtSoDienThoaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSoDienThoaiActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtSoDienThoaiActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        int confirmed = JOptionPane.showConfirmDialog(null,
+                "Bạn có chắc muốn thoát chương trình không?", "Xác nhận",
+                JOptionPane.YES_NO_OPTION);
+
+        if (confirmed == JOptionPane.YES_OPTION) {
+            main m = new main();
+            m.setVisible(true);
+            this.setVisible(false);
+        } else {
+            setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        }
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments
