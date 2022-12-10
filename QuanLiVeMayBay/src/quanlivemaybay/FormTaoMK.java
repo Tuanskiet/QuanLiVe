@@ -61,9 +61,9 @@ public class FormTaoMK extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Nhap mat khau moi : ");
+        jLabel1.setText("Nhập mật khẩu mới : ");
 
-        jLabel2.setText("Nhap lai mat khau : ");
+        jLabel2.setText("Nhập lại mât khẩu : ");
 
         btnOK.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/rsz_check.png"))); // NOI18N
         btnOK.setText("OK");
@@ -95,7 +95,7 @@ public class FormTaoMK extends javax.swing.JFrame {
                         .addGap(46, 46, 46)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtMatKhauMoi)
-                            .addComponent(txtNhapLaiMK, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)))
+                            .addComponent(txtNhapLaiMK, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnOK, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(28, 28, 28)
