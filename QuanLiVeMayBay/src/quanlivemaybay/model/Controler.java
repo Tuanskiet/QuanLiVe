@@ -15,5 +15,6 @@ public class Controler {
 
     public static ArrayList<User> arrayListTaiKhoan = new ArrayList<>();
     public static ArrayList<VeMayBay> arrayListVe = new ArrayList<>();
+    public static ArrayList<Datvemain> arrayListDatVe = new ArrayList<>();
 
 }

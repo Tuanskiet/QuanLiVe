@@ -9,16 +9,27 @@ package quanlivemaybay.model;
  * @author ADMIN
  */
 public class Datvemain {
-    private String maVe,maKH,ngayDat;
+    private String maVe,maKH,ngayDat, gioDat;
 
     public Datvemain() {
     }
 
-    public Datvemain(String maVe, String maKH, String ngayDat) {
+    public Datvemain(String maVe, String maKH, String ngayDat, String gioDat) {
         this.maVe = maVe;
         this.maKH = maKH;
         this.ngayDat = ngayDat;
+        this.gioDat = gioDat;
     }
+
+    public String getGioDat() {
+        return gioDat;
+    }
+
+    public void setGioDat(String gioDat) {
+        this.gioDat = gioDat;
+    }
+
+   
     
 
     public String getMaVe() {

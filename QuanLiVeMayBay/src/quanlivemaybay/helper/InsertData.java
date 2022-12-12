@@ -9,6 +9,7 @@ import java.sql.*;
 import javax.swing.JOptionPane;
 import quanlivemaybay.model.Controler;
 import quanlivemaybay.VeMayBay;
+import quanlivemaybay.model.Datvemain;
 
 /**
  *
@@ -131,6 +132,45 @@ public class InsertData {
             ps.execute();
 
             JOptionPane.showMessageDialog(null, "Tạo vé thành công!");
+        } catch (Exception ex) {
+            System.out.println(ex);
+        }
+    }
+    
+     public static void LoadDataDatVe() {
+        try {
+            Connection conn = DatabaseHelper.openConnection();
+            Statement st = conn.createStatement();
+            String sql = "SELECT * FROM datve";
+            ResultSet rs = st.executeQuery(sql);
+            Controler.arrayListDatVe.clear();
+            while (rs.next()) {
+                String MaVe = rs.getString(1);
+                String MaKh = rs.getString(2);
+                String NgayDat = String.valueOf(rs.getDate(3));
+                String GioDat = rs.getString(4);
+                Datvemain ve = new Datvemain(MaVe, MaKh, NgayDat, GioDat);
+                Controler.arrayListDatVe.add(ve);
+            }
+            conn.close();
+        } catch (Exception ex) {
+            System.out.println(ex);
+        }
+    }
+    
+    
+    public static void insertDatVe(String mave, String makh, Date ngaydat, String giodat) throws Exception {
+        String sqlCommand = "INSERT INTO datve VALUES (?,?,?,?)";
+        try {
+            Connection con = DatabaseHelper.openConnection();
+            PreparedStatement ps = con.prepareStatement(sqlCommand);
+            ps.setString(1,mave);
+            ps.setString(2, makh);
+            ps.setDate(3, ngaydat);
+            ps.setString(4, giodat);
+            ps.execute();
+
+            JOptionPane.showMessageDialog(null, "Mua thành công!");
         } catch (Exception ex) {
             System.out.println(ex);
         }

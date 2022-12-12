@@ -27,6 +27,7 @@ public class UserPage extends javax.swing.JFrame {
     DefaultTableModel tblmodel = null;
     Vector row = null;
     int index = 0;
+    String MaKH;
 //    ArrayList<Datvemain> list = new ArrayList<>();
 
     /**
@@ -39,6 +40,18 @@ public class UserPage extends javax.swing.JFrame {
         InsertData.LoadDataVe();
         initTable();
         loadComboBox();
+
+    }
+
+    public UserPage(String maKH) {
+        initComponents();
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        InsertData.LoadDataVe();
+        initTable();
+        loadComboBox();
+        this.MaKH = maKH;
+
 
     }
 
@@ -745,7 +758,7 @@ public class UserPage extends javax.swing.JFrame {
                 row.add(rs.getFloat(8));
                 tblmodel.addRow(row);
             }
-          
+
             tblDatVe.setModel(tblmodel);
             con.close();
         } catch (Exception e) {
@@ -754,12 +767,10 @@ public class UserPage extends javax.swing.JFrame {
     }//GEN-LAST:event_btntimkiembtntimkiemActionPerformed
 
     private void btnmuabtnmuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmuabtnmuaActionPerformed
-        String t = "Điểm Khởi Hành:" + lbldiemkh.getText() + "\n";
-        t += "Điểm Đến:" + lbldiemden.getText() + "\n";
-        t += "Ngày Bay:" + lblngaybay.getText() + "\n";
-        t += "Thời Gian Bay:" + lblthoigian.getText() + "\n";
-        t += "Đặt vé thành công";
-        JOptionPane.showMessageDialog(this, t);
+        String mave = tblDatVe.getValueAt(tblDatVe.getSelectedRow(), 0).toString();
+//        String makh = 
+        System.out.println( "ve :  "+MaKH);
+//        InsertData.insertDatVe(name, name, ngaydat, name);
     }//GEN-LAST:event_btnmuabtnmuaActionPerformed
 
     private void txtMaChuyenBayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMaChuyenBayActionPerformed
