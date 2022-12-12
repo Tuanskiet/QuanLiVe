@@ -17,6 +17,7 @@ import javax.swing.table.DefaultTableModel;
 import quanlivemaybay.helper.DatabaseHelper;
 import quanlivemaybay.helper.InsertData;
 import quanlivemaybay.model.Controler;
+import quanlivemaybay.model.User;
 
 /**
  *
@@ -806,13 +807,25 @@ public class UserPage extends javax.swing.JFrame {
     private void btnKiemTraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKiemTraActionPerformed
         // TODO add your handling code here:
         for (VeMayBay ve : Controler.arrayListVe) {
-            if (txtMaVe.getText().equals(txtMaVe)) {
+            if (txtMaVe.getText().equals(ve.getMaVe())) {
                 flag = true;
                 txtDiemDen.setText(ve.getDiemden());
                 txtDiemDi.setText(ve.getDiemdi());
                 txtGioBay.setText(ve.getGioBay());
                 txtNgayBay.setText(ve.getNgayBay());
-                txtHangVe.setText(ve.getLoaiVe());
+                txtLoaiVe.setText(ve.getLoaiVe());
+
+            }
+        }
+        
+        for (User us : Controler.arrayListTaiKhoan) {
+            if (MaKH.equals(us.getMaKH())) {
+               
+                txtMaKhachHang.setText(us.getMaKH());
+                txtDiemDi.setText(us.getDiemdi());
+                txtGioBay.setText(us.getGioBay());
+                txtNgayBay.setText(us.getNgayBay());
+                txtLoaiVe.setText(us.getLoaiVe());
 
             }
         }
