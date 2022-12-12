@@ -5,9 +5,12 @@
 package quanlivemaybay;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import static javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE;
 import javax.swing.table.DefaultTableModel;
@@ -731,7 +734,6 @@ public class UserPage extends javax.swing.JFrame {
             st.setString(1, cboDiemDi.getSelectedItem().toString());
             st.setString(2, cboDiemDen.getSelectedItem().toString());
             ResultSet rs = st.executeQuery();
-            int find = -1;
             tblmodel.setRowCount(0);
             while (rs.next()) {
                 Vector row = new Vector();
@@ -754,10 +756,16 @@ public class UserPage extends javax.swing.JFrame {
     }//GEN-LAST:event_btntimkiembtntimkiemActionPerformed
 
     private void btnmuabtnmuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmuabtnmuaActionPerformed
-        String mave = tblDatVe.getValueAt(tblDatVe.getSelectedRow(), 0).toString();
-//        String makh = 
-        System.out.println("ve :  " + MaKH);
-//        InsertData.insertDatVe(name, name, ngaydat, name);
+        int row = tblDatVe.getSelectedRow();
+        if (row >= 0) {
+            String mave = tblDatVe.getValueAt(row, 0).toString();
+            String gio = String.valueOf(java.time.LocalTime.now()).substring(0, 5);
+            try {
+                InsertData.insertDatVe(mave, MaKH, Date.valueOf(java.time.LocalDate.now()), gio);
+            } catch (Exception ex) {
+                Logger.getLogger(UserPage.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }//GEN-LAST:event_btnmuabtnmuaActionPerformed
 
     private void txtDiemDiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDiemDiActionPerformed
@@ -808,7 +816,7 @@ public class UserPage extends javax.swing.JFrame {
 
             }
         }
-        if(flag == false){
+        if (flag == false) {
             JOptionPane.showMessageDialog(this, "Hãy nhập mã vé!");
         }
     }//GEN-LAST:event_btnKiemTraActionPerformed
