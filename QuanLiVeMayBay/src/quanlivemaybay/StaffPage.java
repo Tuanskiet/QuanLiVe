@@ -594,7 +594,7 @@ public class StaffPage extends javax.swing.JFrame {
                     .addContainerGap(89, Short.MAX_VALUE)))
         );
 
-        jTabbedPane1.addTab("Quản lí khách hàng ", jPanel3);
+        jTabbedPane1.addTab("Quản lí NV/KH ", jPanel3);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -791,8 +791,8 @@ public class StaffPage extends javax.swing.JFrame {
                 JOptionPane.YES_NO_OPTION);
 
         if (confirmed == JOptionPane.YES_OPTION) {
-            main m = new main();
-            m.setVisible(true);
+//            main m = new main();
+//            m.setVisible(true);
             this.setVisible(false);
         } else {
             setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);

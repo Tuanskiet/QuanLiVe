@@ -5,7 +5,6 @@
 package quanlivemaybay;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,6 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import quanlivemaybay.helper.DatabaseHelper;
 import quanlivemaybay.helper.InsertData;
 import quanlivemaybay.model.Controler;
 import quanlivemaybay.model.User;
@@ -46,13 +46,13 @@ public class DangKi extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setDefaultCloseOperation(this.DISPOSE_ON_CLOSE);
         this.jFrame = jFrame;
+        autoID();
     }
 
     public void autoID() {
 
         try {
-            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            conn = DriverManager.getConnection(url, user, pass);
+            conn = DatabaseHelper.openConnection();
             Statement s = conn.createStatement();
             ResultSet rs = s.executeQuery("select MAX(MaKh) from taikhoan");
             rs.next();
@@ -69,6 +69,8 @@ public class DangKi extends javax.swing.JFrame {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(DangKi.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
+            Logger.getLogger(DangKi.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
             Logger.getLogger(DangKi.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -255,24 +257,9 @@ public class DangKi extends javax.swing.JFrame {
         String passw = txtPass.getText();
         String passNL = txtPassNL.getText();
         if (passw.equals(passNL)) {
-            User users = new User(maKH, tenKH, soDT, gioiTinh, email, tenDN, passw, soDT);
+            User users = new User(maKH, tenKH, soDT, gioiTinh, email, tenDN, passw, "KH");
             try {
-//                Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-//                conn = DriverManager.getConnection(url, user, pass);
-//                pst = conn.prepareStatement("insert into Taikhoan values (?,?,?,?,?,?,?,?)");
-//                pst.setString(1, maKH);
-//                pst.setString(2, tenKH);
-//                pst.setString(3, soDT);
-//                pst.setString(4, gioiTinh);
-//                pst.setString(5, email);
-//                pst.setString(6, tenDN);
-//                pst.setString(7, passw);
-//                pst.setString(8, "KH");
-//
-//                pst.executeUpdate();
                 InsertData.insertTaiKhoan(users, 'i');
-
-//                JOptionPane.showMessageDialog(this, "Tao thanh cong!");
                 Controler.arrayListTaiKhoan.add(users);
                 resetForm();
                 main m = new main();
@@ -303,7 +290,6 @@ public class DangKi extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-//        DangKi l = new DangKi(this);
         this.setVisible(false);
         jFrame.setVisible(true);
 
