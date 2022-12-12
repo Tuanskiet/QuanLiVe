@@ -5,9 +5,12 @@
 package quanlivemaybay;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import static javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE;
 import javax.swing.table.DefaultTableModel;
@@ -51,7 +54,6 @@ public class UserPage extends javax.swing.JFrame {
         initTable();
         loadComboBox();
         this.MaKH = maKH;
-
 
     }
 
@@ -413,6 +415,11 @@ public class UserPage extends javax.swing.JFrame {
 
         btnKiemTra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/rsz_web-browser.png"))); // NOI18N
         btnKiemTra.setText("Kiểm Tra");
+        btnKiemTra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnKiemTraActionPerformed(evt);
+            }
+        });
 
         btnDoiVe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/rsz_repeat.png"))); // NOI18N
         btnDoiVe.setText("Đổi Vé");
@@ -767,10 +774,16 @@ public class UserPage extends javax.swing.JFrame {
     }//GEN-LAST:event_btntimkiembtntimkiemActionPerformed
 
     private void btnmuabtnmuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmuabtnmuaActionPerformed
-        String mave = tblDatVe.getValueAt(tblDatVe.getSelectedRow(), 0).toString();
-//        String makh = 
-        System.out.println( "ve :  "+MaKH);
-//        InsertData.insertDatVe(name, name, ngaydat, name);
+        int row = tblDatVe.getSelectedRow();
+        if (row >= 0) {
+            String mave = tblDatVe.getValueAt(row, 0).toString();
+            String gio = String.valueOf(java.time.LocalTime.now()).substring(0, 5);
+            try {
+                InsertData.insertDatVe(mave, MaKH, Date.valueOf(java.time.LocalDate.now()), gio);
+            } catch (Exception ex) {
+                Logger.getLogger(UserPage.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }//GEN-LAST:event_btnmuabtnmuaActionPerformed
 
     private void txtMaChuyenBayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMaChuyenBayActionPerformed
@@ -811,6 +824,10 @@ public class UserPage extends javax.swing.JFrame {
 
         getListTable();
     }//GEN-LAST:event_tblDatVeMouseClicked
+
+    private void btnKiemTraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKiemTraActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnKiemTraActionPerformed
 
     /**
      * @param args the command line arguments
