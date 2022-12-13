@@ -6,8 +6,14 @@ package quanlivemaybay;
 
 import java.util.Date;
 import javax.swing.table.DefaultTableModel;
+import quanlivemaybay.helper.DatabaseHelper;
 import quanlivemaybay.helper.InsertData;
 import quanlivemaybay.model.Controler;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
+import java.util.Vector;
 
 /**
  *
@@ -19,8 +25,7 @@ public class KiemTraVeStaff extends javax.swing.JInternalFrame {
 
     public KiemTraVeStaff() {
         initComponents();
-        jdcTuNgay.setDate(new Date(System.currentTimeMillis()));
-        jdcDenNgay.setDate(new Date(System.currentTimeMillis()));
+        jdcNgayBay.setDate(new Date(System.currentTimeMillis()));
         InsertData.LoadDataVe();
         loadTable();
         loadComboBox();
@@ -42,8 +47,8 @@ public class KiemTraVeStaff extends javax.swing.JInternalFrame {
         }
 
         for (VeMayBay ve : Controler.arrayListVe) {
-            dtmVe.addRow(new Object[]{ve.getMaVe(), ve.getDiemdi(), 
-                ve.getDiemden(), ve.getLoaiVe(), ve.getGioBay(), ve.getNgayBay(), 
+            dtmVe.addRow(new Object[]{ve.getMaVe(), ve.getDiemdi(),
+                ve.getDiemden(), ve.getLoaiVe(), ve.getGioBay(), ve.getNgayBay(),
                 ve.getNgayBan(), ve.getGiaVe()});
         }
         dtmVe.fireTableDataChanged();
@@ -66,9 +71,7 @@ public class KiemTraVeStaff extends javax.swing.JInternalFrame {
         cboDiemDi = new javax.swing.JComboBox();
         jLabel4 = new javax.swing.JLabel();
         cboDiemDen = new javax.swing.JComboBox();
-        jLabel5 = new javax.swing.JLabel();
-        jdcTuNgay = new com.toedter.calendar.JDateChooser();
-        jdcDenNgay = new com.toedter.calendar.JDateChooser();
+        jdcNgayBay = new com.toedter.calendar.JDateChooser();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -80,19 +83,16 @@ public class KiemTraVeStaff extends javax.swing.JInternalFrame {
         jLabel2.setText("Điểm đi:");
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel3.setText("Từ ngày:");
+        jLabel3.setText("Ngày bay : ");
 
         cboDiemDi.setBackground(new java.awt.Color(153, 153, 153));
-        cboDiemDi.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Hà Nội", "Hải Phòng", "Nghệ An" }));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setText("Điểm đến:");
 
         cboDiemDen.setBackground(new java.awt.Color(153, 153, 153));
-        cboDiemDen.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Sài Gòn", "Lâm Đồng", "Vũng Tàu" }));
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel5.setText("Đến ngày:");
+        jdcNgayBay.setDateFormatString("yyyy-MM-dd");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -106,15 +106,11 @@ public class KiemTraVeStaff extends javax.swing.JInternalFrame {
                 .addGap(47, 47, 47)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(cboDiemDi, 0, 175, Short.MAX_VALUE)
-                    .addComponent(jdcTuNgay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(jdcNgayBay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 180, Short.MAX_VALUE)
+                .addComponent(jLabel4)
                 .addGap(101, 101, 101)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(cboDiemDen, 0, 175, Short.MAX_VALUE)
-                    .addComponent(jdcDenNgay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(cboDiemDen, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28))
         );
         jPanel2Layout.setVerticalGroup(
@@ -127,17 +123,20 @@ public class KiemTraVeStaff extends javax.swing.JInternalFrame {
                     .addComponent(jLabel4)
                     .addComponent(cboDiemDen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jdcTuNgay, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel3)
-                    .addComponent(jdcDenNgay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jdcNgayBay, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
                 .addGap(0, 28, Short.MAX_VALUE))
         );
 
         jButton2.setBackground(new java.awt.Color(153, 153, 153));
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/rsz_web-browser.png"))); // NOI18N
         jButton2.setText("Kiểm tra");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setBackground(new java.awt.Color(153, 153, 153));
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/rsz_exit.png"))); // NOI18N
@@ -173,7 +172,7 @@ public class KiemTraVeStaff extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap(300, Short.MAX_VALUE)
+                        .addContainerGap(304, Short.MAX_VALUE)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(69, 69, 69)
                         .addComponent(jButton3)
@@ -221,6 +220,39 @@ public class KiemTraVeStaff extends javax.swing.JInternalFrame {
         this.hide();
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        try {
+            Connection con = DatabaseHelper.openConnection();
+            String sql = "select * from Ve where Diemdi = ? and Diemden = ? and NgayBay =?";
+            PreparedStatement st = con.prepareStatement(sql);
+            SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd");
+            Date ngayBay = jdcNgayBay.getDate();
+            
+            st.setString(1, cboDiemDi.getSelectedItem().toString());
+            st.setString(2, cboDiemDen.getSelectedItem().toString());
+            st.setString(3,  formater.format(ngayBay));
+            ResultSet rs = st.executeQuery();
+            dtmVe.setRowCount(0);
+            while (rs.next()) {
+                Vector row = new Vector();
+                row.add(rs.getString(1));
+                row.add(rs.getString(2));
+                row.add(rs.getString(3));
+                row.add(rs.getString(4));
+                row.add(rs.getString(5));
+                row.add(String.valueOf(rs.getDate(6)));
+                row.add(String.valueOf(rs.getDate(7)));
+                row.add(rs.getFloat(8));
+                dtmVe.addRow(row);
+            }
+
+            tblVe.setModel(dtmVe);
+            con.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox cboDiemDen;
@@ -230,13 +262,11 @@ public class KiemTraVeStaff extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private com.toedter.calendar.JDateChooser jdcDenNgay;
-    private com.toedter.calendar.JDateChooser jdcTuNgay;
+    private com.toedter.calendar.JDateChooser jdcNgayBay;
     private javax.swing.JTable tblVe;
     // End of variables declaration//GEN-END:variables
 }

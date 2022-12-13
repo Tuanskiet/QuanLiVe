@@ -281,7 +281,7 @@ public class BanVeMB extends javax.swing.JInternalFrame {
         String gioBay = cboGioBay.getSelectedItem().toString();
         SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd");
         Date ngayBay = jdcNgayBay.getDate();
-        Date ngayBan = jdcNgayBay.getDate();
+        Date ngayBan = jdcNgayBan.getDate();
         float giaVe = Float.parseFloat(txtGiaVe.getText());
         VeMayBay ve = new VeMayBay(maVe, diemDi, diemDen, loaiVe, gioBay, formater.format(ngayBay), formater.format(ngayBan), giaVe);
 
