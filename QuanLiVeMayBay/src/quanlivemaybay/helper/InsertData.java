@@ -93,8 +93,8 @@ public class InsertData {
     public static void LoadDataVe() {
         try {
             Connection conn = DatabaseHelper.openConnection();
+            String sql = "SELECT * FROM Ve ";
             Statement st = conn.createStatement();
-            String sql = "SELECT * FROM Ve";
             ResultSet rs = st.executeQuery(sql);
             Controler.arrayListVe.clear();
             while (rs.next()) {
@@ -136,13 +136,14 @@ public class InsertData {
             System.out.println(ex);
         }
     }
-    
-     public static void LoadDataDatVe() {
+
+    public static void LoadDataDatVe(String makh) {
         try {
             Connection conn = DatabaseHelper.openConnection();
-            Statement st = conn.createStatement();
-            String sql = "SELECT * FROM datve";
-            ResultSet rs = st.executeQuery(sql);
+            String sql = "SELECT * FROM datve where MaKh = ? ";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, makh);
+            ResultSet rs = ps.executeQuery();
             Controler.arrayListDatVe.clear();
             while (rs.next()) {
                 String MaVe = rs.getString(1);
@@ -157,14 +158,13 @@ public class InsertData {
             System.out.println(ex);
         }
     }
-    
-    
+
     public static void insertDatVe(String mave, String makh, Date ngaydat, String giodat) throws Exception {
         String sqlCommand = "INSERT INTO datve VALUES (?,?,?,?)";
         try {
             Connection con = DatabaseHelper.openConnection();
             PreparedStatement ps = con.prepareStatement(sqlCommand);
-            ps.setString(1,mave);
+            ps.setString(1, mave);
             ps.setString(2, makh);
             ps.setDate(3, ngaydat);
             ps.setString(4, giodat);
