@@ -310,7 +310,7 @@ public class main extends javax.swing.JFrame {
                         return;
                     } else {
                         JOptionPane.showMessageDialog(this, "Đăng nhập vào tài khoản khach hang thành công!");
-                            
+
                         UserPage up = new UserPage(MaKH);
                         this.hide();
                         up.setVisible(true);

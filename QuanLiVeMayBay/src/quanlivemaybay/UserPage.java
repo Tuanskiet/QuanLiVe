@@ -5,12 +5,10 @@
 package quanlivemaybay;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Date;
 import java.util.Vector;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import static javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE;
 import javax.swing.table.DefaultTableModel;
@@ -26,13 +24,12 @@ import quanlivemaybay.model.User;
  */
 public class UserPage extends javax.swing.JFrame {
 
-    DefaultTableModel tblmodel = null;
     DefaultTableModel tblmodelVeCuaToi = null;
-
+    DefaultTableModel tblmodel = null;
     Vector row = null;
     int index = 0;
-    boolean flag = false;
     String MaKH;
+    boolean flag = false;
 //    ArrayList<Datvemain> list = new ArrayList<>();
 
     /**
@@ -43,7 +40,6 @@ public class UserPage extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         InsertData.LoadDataVe();
-        InsertData.LoadDataDatVe(MaKH);
         initTable();
         loadComboBox();
 
@@ -147,6 +143,7 @@ public class UserPage extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
@@ -155,6 +152,7 @@ public class UserPage extends javax.swing.JFrame {
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
         txtMaVe = new javax.swing.JTextField();
+        txtMaChuyenBay = new javax.swing.JTextField();
         txtDiemDi = new javax.swing.JTextField();
         txtDiemDen = new javax.swing.JTextField();
         txtGioBay = new javax.swing.JTextField();
@@ -165,16 +163,23 @@ public class UserPage extends javax.swing.JFrame {
         jPanel7 = new javax.swing.JPanel();
         btnKiemTra = new javax.swing.JButton();
         btnDoiVe = new javax.swing.JButton();
+        btnTiepTuc = new javax.swing.JButton();
         btnThoat = new javax.swing.JButton();
         jPanel8 = new javax.swing.JPanel();
         jLabel22 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
         jLabel26 = new javax.swing.JLabel();
+        jLabel27 = new javax.swing.JLabel();
         jLabel28 = new javax.swing.JLabel();
         jLabel29 = new javax.swing.JLabel();
         txtMaKhachHang = new javax.swing.JTextField();
         txtTenKhachHang = new javax.swing.JTextField();
+        txtHoChieu = new javax.swing.JTextField();
+        txtNgaySinh = new javax.swing.JTextField();
         txtGioiTinh = new javax.swing.JTextField();
+        txtDiaChi = new javax.swing.JTextField();
         txtSoDienThoai = new javax.swing.JTextField();
         txtEmail = new javax.swing.JTextField();
         jLabel30 = new javax.swing.JLabel();
@@ -388,6 +393,8 @@ public class UserPage extends javax.swing.JFrame {
         jLabel13.setForeground(new java.awt.Color(0, 0, 255));
         jLabel13.setText("Thông Tin Về Chuyến Bay:");
 
+        jLabel14.setText("Mã Chuyến Bay :");
+
         jLabel15.setText("Điểm Đi :");
 
         jLabel16.setText("Điểm Đến:");
@@ -401,6 +408,12 @@ public class UserPage extends javax.swing.JFrame {
         jLabel20.setText("Hạng Vé:");
 
         jLabel21.setText("Giá Vé:");
+
+        txtMaChuyenBay.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtMaChuyenBayActionPerformed(evt);
+            }
+        });
 
         txtDiemDi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -425,6 +438,14 @@ public class UserPage extends javax.swing.JFrame {
         btnDoiVe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/rsz_repeat.png"))); // NOI18N
         btnDoiVe.setText("Đổi Vé");
 
+        btnTiepTuc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/rsz_circled-chevron-right.png"))); // NOI18N
+        btnTiepTuc.setText("Tiếp Tục");
+        btnTiepTuc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTiepTucActionPerformed(evt);
+            }
+        });
+
         btnThoat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/rsz_exit.png"))); // NOI18N
         btnThoat.setText("Thoát");
 
@@ -437,26 +458,35 @@ public class UserPage extends javax.swing.JFrame {
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(btnThoat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnKiemTra, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnDoiVe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnDoiVe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnTiepTuc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(25, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
-                .addGap(33, 33, 33)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnKiemTra)
-                .addGap(30, 30, 30)
+                .addGap(18, 18, 18)
                 .addComponent(btnDoiVe)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(btnTiepTuc)
+                .addGap(18, 18, 18)
                 .addComponent(btnThoat)
-                .addGap(42, 42, 42))
+                .addGap(20, 20, 20))
         );
 
         jLabel22.setText("Mã Khách Hàng:");
 
         jLabel23.setText("Tên Khách Hàng:");
 
+        jLabel24.setText("CMT/Hộ Chiếu:");
+
+        jLabel25.setText("Ngày Sinh :");
+
         jLabel26.setText("Giới Tính:");
+
+        jLabel27.setText("Địa Chỉ:");
 
         jLabel28.setText("Số Điện Thoại :");
 
@@ -473,29 +503,35 @@ public class UserPage extends javax.swing.JFrame {
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addContainerGap()
+                .addComponent(jLabel29)
+                .addGap(72, 72, 72)
+                .addComponent(txtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE))
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel26)
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel24)
+                            .addComponent(jLabel25)
+                            .addComponent(jLabel27)
+                            .addComponent(jLabel28))
+                        .addGap(22, 22, 22)
+                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtDiaChi, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
+                            .addComponent(txtNgaySinh)
+                            .addComponent(txtGioiTinh)
+                            .addComponent(txtHoChieu, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtSoDienThoai)))
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel23)
                             .addComponent(jLabel22))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtTenKhachHang, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtMaKhachHang, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel28)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
-                        .addComponent(txtSoDienThoai, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addComponent(jLabel26)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtGioiTinh, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addComponent(jLabel29)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                            .addComponent(txtMaKhachHang)
+                            .addComponent(txtTenKhachHang))))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -504,23 +540,35 @@ public class UserPage extends javax.swing.JFrame {
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel22)
                     .addComponent(txtMaKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(49, 49, 49)
+                .addGap(35, 35, 35)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtTenKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(56, 56, 56)
+                .addGap(27, 27, 27)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtGioiTinh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel26))
-                .addGap(45, 45, 45)
+                    .addComponent(jLabel24)
+                    .addComponent(txtHoChieu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(39, 39, 39)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel28)
-                    .addComponent(txtSoDienThoai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(38, 38, 38)
+                    .addComponent(jLabel25)
+                    .addComponent(txtNgaySinh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(34, 34, 34)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel26)
+                    .addComponent(txtGioiTinh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(32, 32, 32)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel27)
+                    .addComponent(txtDiaChi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtSoDienThoai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel28))
+                .addGap(61, 61, 61)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel29)
                     .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(124, 124, 124))
+                .addGap(79, 79, 79))
         );
 
         jLabel30.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -558,8 +606,12 @@ public class UserPage extends javax.swing.JFrame {
                                 .addComponent(txtDiemDen, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel6Layout.createSequentialGroup()
                                 .addComponent(jLabel15)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txtDiemDi, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGap(51, 51, 51)
+                                .addComponent(txtDiemDi))
+                            .addGroup(jPanel6Layout.createSequentialGroup()
+                                .addComponent(jLabel14)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtMaChuyenBay))))
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGap(27, 27, 27)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -578,17 +630,19 @@ public class UserPage extends javax.swing.JFrame {
                                 .addComponent(txtMaVe, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(14, 14, 14)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel8)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel30)
+                    .addComponent(jLabel8))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel6Layout.createSequentialGroup()
@@ -597,27 +651,31 @@ public class UserPage extends javax.swing.JFrame {
                             .addComponent(txtMaVe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(jLabel13)
-                        .addGap(42, 42, 42)
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(29, 29, 29)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtMaChuyenBay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel14))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel15)
                             .addComponent(txtDiemDi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(25, 25, 25)
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel16)
                             .addComponent(txtDiemDen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(25, 25, 25)
+                        .addGap(18, 18, 18)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel17)
                             .addComponent(txtGioBay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(28, 28, 28)
+                        .addGap(18, 18, 18)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel18)
                             .addComponent(txtNgayBay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(37, 37, 37)
+                        .addGap(18, 18, 18)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel19)
                             .addComponent(txtLoaiVe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(130, 130, 130)
+                        .addGap(149, 149, 149)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel20)
                             .addComponent(txtHangVe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -625,18 +683,9 @@ public class UserPage extends javax.swing.JFrame {
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel21)
                             .addComponent(txtGiaVe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGap(36, 36, 36)
-                        .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-<<<<<<< HEAD
-                    .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)))
-=======
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGap(43, 43, 43)
-                        .addComponent(jLabel30)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE))))
->>>>>>> 9acb9e2b78193bbebd20077be7f59f137b006a0f
+                    .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -666,15 +715,20 @@ public class UserPage extends javax.swing.JFrame {
 
         tblVeCuaToi.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
-                "Mã vé", "Ngày đặt ", "Giờ đặt"
+                "Ma ve ", "Ngay dat", "Gio dat"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                true, true, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane2.setViewportView(tblVeCuaToi);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -688,10 +742,10 @@ public class UserPage extends javax.swing.JFrame {
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(29, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(44, 44, 44))
+                .addContainerGap(61, Short.MAX_VALUE))
         );
 
         jTabbedPane4.addTab("Vé của tôi", jPanel3);
@@ -735,6 +789,7 @@ public class UserPage extends javax.swing.JFrame {
             st.setString(1, cboDiemDi.getSelectedItem().toString());
             st.setString(2, cboDiemDen.getSelectedItem().toString());
             ResultSet rs = st.executeQuery();
+            int find = -1;
             tblmodel.setRowCount(0);
             while (rs.next()) {
                 Vector row = new Vector();
@@ -757,7 +812,6 @@ public class UserPage extends javax.swing.JFrame {
     }//GEN-LAST:event_btntimkiembtntimkiemActionPerformed
 
     private void btnmuabtnmuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmuabtnmuaActionPerformed
-
         int row = tblDatVe.getSelectedRow();
         boolean flag = false;
         if (row >= 0) {
@@ -777,13 +831,16 @@ public class UserPage extends javax.swing.JFrame {
                     initTable();
 
                 } catch (Exception ex) {
-                    Logger.getLogger(UserPage.class.getName()).log(Level.SEVERE, null, ex);
+//                    Logger.getLogger(UserPage.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
 
         }
-
     }//GEN-LAST:event_btnmuabtnmuaActionPerformed
+
+    private void txtMaChuyenBayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMaChuyenBayActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtMaChuyenBayActionPerformed
 
     private void txtDiemDiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDiemDiActionPerformed
         // TODO add your handling code here:
@@ -792,6 +849,10 @@ public class UserPage extends javax.swing.JFrame {
     private void txtHangVeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtHangVeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtHangVeActionPerformed
+
+    private void btnTiepTucActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTiepTucActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnTiepTucActionPerformed
 
     private void txtSoDienThoaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSoDienThoaiActionPerformed
         // TODO add your handling code here:
@@ -817,7 +878,6 @@ public class UserPage extends javax.swing.JFrame {
     }//GEN-LAST:event_tblDatVeMouseClicked
 
     private void btnKiemTraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKiemTraActionPerformed
-        // TODO add your handling code here:
         for (VeMayBay ve : Controler.arrayListVe) {
             if (txtMaVe.getText().equals(ve.getMaVe())) {
                 flag = true;
@@ -886,6 +946,7 @@ public class UserPage extends javax.swing.JFrame {
     private javax.swing.JButton btnDoiVe;
     private javax.swing.JButton btnKiemTra;
     private javax.swing.JButton btnThoat;
+    private javax.swing.JButton btnTiepTuc;
     private javax.swing.JButton btnlammoi;
     private javax.swing.JButton btnmua;
     private javax.swing.JButton btntimkiem;
@@ -894,6 +955,7 @@ public class UserPage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
@@ -904,7 +966,10 @@ public class UserPage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
@@ -930,6 +995,7 @@ public class UserPage extends javax.swing.JFrame {
     private javax.swing.JLabel lblthoigian;
     private javax.swing.JTable tblDatVe;
     private javax.swing.JTable tblVeCuaToi;
+    private javax.swing.JTextField txtDiaChi;
     private javax.swing.JTextField txtDiemDen;
     private javax.swing.JTextField txtDiemDi;
     private javax.swing.JTextField txtEmail;
@@ -937,10 +1003,13 @@ public class UserPage extends javax.swing.JFrame {
     private javax.swing.JTextField txtGioBay;
     private javax.swing.JTextField txtGioiTinh;
     private javax.swing.JTextField txtHangVe;
+    private javax.swing.JTextField txtHoChieu;
     private javax.swing.JTextField txtLoaiVe;
+    private javax.swing.JTextField txtMaChuyenBay;
     private javax.swing.JTextField txtMaKhachHang;
     private javax.swing.JTextField txtMaVe;
     private javax.swing.JTextField txtNgayBay;
+    private javax.swing.JTextField txtNgaySinh;
     private javax.swing.JTextField txtSoDienThoai;
     private javax.swing.JTextField txtTenKhachHang;
     // End of variables declaration//GEN-END:variables
