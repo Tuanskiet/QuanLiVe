@@ -175,4 +175,33 @@ public class InsertData {
             System.out.println(ex);
         }
     }
+
+    public static void updateDatVe(  String mavedoi,String makh, String maveht) throws Exception {
+        String sqlCommand = "update datve set Mave = ? where makh = ? and mave = ? ";
+        try {
+            Connection con = DatabaseHelper.openConnection();
+            PreparedStatement ps = con.prepareStatement(sqlCommand);
+            ps.setString(1, mavedoi);
+            ps.setString(2, makh);
+            ps.setString(3, maveht);
+            ps.execute();
+            JOptionPane.showMessageDialog(null, "Đổi vé thành công!");
+        } catch (Exception ex) {
+            System.out.println(ex);
+        }
+    }
+    
+    public static void delDatVe(String makh, String mave) throws Exception {
+        String sqlCommand = "delete datve where makh = ? and mave = ? ";
+        try {
+            Connection con = DatabaseHelper.openConnection();
+            PreparedStatement ps = con.prepareStatement(sqlCommand);
+            ps.setString(1, makh);
+            ps.setString(2, mave);
+            ps.execute();
+            JOptionPane.showMessageDialog(null, "Hủy vé thành công!");
+        } catch (Exception ex) {
+            System.out.println(ex);
+        }
+    }
 }

@@ -11,18 +11,14 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Vector;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import static javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE;
 import quanlivemaybay.helper.DatabaseHelper;
 import quanlivemaybay.helper.InsertData;
 import quanlivemaybay.model.Controler;
 import quanlivemaybay.model.Datvemain;
-import quanlivemaybay.helper.DatabaseHelper;
-import quanlivemaybay.helper.InsertData;
-import quanlivemaybay.model.Controler;
-import quanlivemaybay.model.Datvemain;
-import quanlivemaybay.model.User;
+
 /**
  *
  * @author ADMIN
@@ -32,6 +28,9 @@ public class Doive extends javax.swing.JFrame {
     DefaultTableModel dtmVe;
     ArrayList<Datvemain> dv = new ArrayList<>();
     String Makh;
+    String maveht = "";
+    JFrame jframe;
+
     /**
      * Creates new form Doive
      */
@@ -42,17 +41,25 @@ public class Doive extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         loadTable();
         loadComboBox();
-        
-        
-        
+
     }
-    public Doive(String MAkh){
+
+    public Doive(String MAkh, String Mave, JFrame jf) {
         this.Makh = MAkh;
+        this.jframe = jf;
+        initComponents();
+        jdcNgayBay.setDate(new Date(System.currentTimeMillis()));
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         InsertData.LoadDataVe();
         InsertData.LoadDataDatVe(Makh);
+        setLocationRelativeTo(null);
+        loadTable();
         loadComboBox();
-        System.out.println(Makh);
+//        if (Mave.equals("")) {
+//            JOptionPane.showMessageDialog(this, "Ban chua nhap ve!");
+//            return;
+//        }
+        this.maveht = Mave;
     }
 
     public void loadComboBox() {
@@ -75,6 +82,20 @@ public class Doive extends javax.swing.JFrame {
                 ve.getNgayBan(), ve.getGiaVe()});
         }
         dtmVe.fireTableDataChanged();
+    }
+    public static void loadTablee(){
+        DefaultTableModel tblmodelVeCuaToi = (DefaultTableModel) UserPage.tblVeCuaToi.getModel();
+
+
+        while (tblmodelVeCuaToi.getRowCount() > 0) {
+            tblmodelVeCuaToi.removeRow(0);
+        }
+
+        for (Datvemain ve : Controler.arrayListDatVe) {
+            tblmodelVeCuaToi.addRow(new Object[]{ve.getMaVe(), ve.getNgayDat(), ve.getGioDat()});
+        }
+
+        tblmodelVeCuaToi.fireTableDataChanged();
     }
 
     /**
@@ -100,6 +121,14 @@ public class Doive extends javax.swing.JFrame {
         tblVe = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Điểm đi:");
@@ -288,7 +317,11 @@ public class Doive extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        this.hide();
+        this.setVisible(false);
+        
+
+        jframe.setVisible(true);
+
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void cboDiemDiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboDiemDiActionPerformed
@@ -297,34 +330,43 @@ public class Doive extends javax.swing.JFrame {
 
     private void tblVeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblVeMouseClicked
         // TODO add your handling code here:
-        
-       int log = JOptionPane.showConfirmDialog (null, "Bạn muốn đổi vé","WARNING", JOptionPane.YES_NO_OPTION);
-           if(log== JOptionPane.YES_OPTION){
-              int row = tblVe.getSelectedRow();
+
+        int row = tblVe.getSelectedRow();
+        String mavedoi = tblVe.getValueAt(row, 0).toString();
         boolean flag = false;
+        String mes = "Bạn có muốn đổi vé " + maveht + " sang vé " + mavedoi + " không?";
         if (row >= 0) {
-            String mave = tblVe.getValueAt(row, 0).toString();
-            String gio = String.valueOf(java.time.LocalTime.now()).substring(0, 5);
+            int log = JOptionPane.showConfirmDialog(null, mes, "WARNING", JOptionPane.YES_NO_OPTION);
+            if (log == JOptionPane.YES_OPTION) {
 
-            for (Datvemain ve : Controler.arrayListDatVe) {
-                if (mave.equals(ve.getMaVe())) {
-                    JOptionPane.showMessageDialog(null, "Bạn đã đặt vé này rồi!");
-                    flag = true;
+                for (Datvemain ve : Controler.arrayListDatVe) {
+                    if (mavedoi.equals(ve.getMaVe())) {
+                        JOptionPane.showMessageDialog(null, "Bạn đã đặt vé này rồi!");
+                        flag = true;
+                        return;
+                    }
                 }
-            }
-            if (flag == false) {
-                try {
-                    InsertData.insertDatVe(mave, Makh, java.sql.Date.valueOf(java.time.LocalDate.now()), gio);
-                    InsertData.LoadDataDatVe(Makh);
-
-                } catch (Exception ex) {
+                if (flag == false) {
+                    try {
+                        InsertData.updateDatVe(mavedoi, Makh, maveht);
+                        InsertData.LoadDataDatVe(Makh);
+                    } catch (Exception ex) {
 //                    Logger.getLogger(UserPage.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
-            }
 
+            }
         }
-           }
     }//GEN-LAST:event_tblVeMouseClicked
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+
+    }//GEN-LAST:event_formWindowClosed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        this.setVisible(false);
+        jframe.setVisible(true);
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments

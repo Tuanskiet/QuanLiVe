@@ -9,6 +9,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Date;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import static javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE;
 import javax.swing.table.DefaultTableModel;
@@ -49,13 +51,15 @@ public class UserPage extends javax.swing.JFrame {
         this.MaKH = maKH;
         initComponents();
         setLocationRelativeTo(null);
-        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+//        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         InsertData.LoadDataVe();
         InsertData.LoadDataDatVe(MaKH);
         initTable();
         loadComboBox();
 
     }
+
+    
 
     private void getListTable() {
         int row = tblDatVe.getSelectedRow();
@@ -186,6 +190,7 @@ public class UserPage extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblVeCuaToi = new javax.swing.JTable();
+        btnXoaVe = new javax.swing.JButton();
 
         jMenu1.setText("jMenu1");
 
@@ -736,6 +741,15 @@ public class UserPage extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(tblVeCuaToi);
 
+        btnXoaVe.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        btnXoaVe.setForeground(new java.awt.Color(255, 0, 0));
+        btnXoaVe.setText("XÓA VÉ");
+        btnXoaVe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoaVeActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -744,13 +758,19 @@ public class UserPage extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 851, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(367, 367, 367)
+                .addComponent(btnXoaVe, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(61, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(38, 38, 38)
+                .addComponent(btnXoaVe)
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         jTabbedPane4.addTab("Vé của tôi", jPanel3);
@@ -912,9 +932,34 @@ public class UserPage extends javax.swing.JFrame {
 
     private void btnDoiVeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDoiVeActionPerformed
         // TODO add your handling code here:
-        dispose();
-        new Doive().setVisible(true);
+        if (txtMaVe.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Ban chua nhap ve!");
+        } else {
+            new Doive(MaKH, txtMaVe.getText(), this).setVisible(true);
+            this.setVisible(false);
+        }
+
     }//GEN-LAST:event_btnDoiVeActionPerformed
+
+    private void btnXoaVeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaVeActionPerformed
+        int row = tblVeCuaToi.getSelectedRow();
+        if (row >= 0) {
+            int log = JOptionPane.showConfirmDialog(null, "Ban co muon xoa ve nay khong?", "WARNING", JOptionPane.YES_NO_OPTION);
+            if (log == JOptionPane.YES_OPTION) {
+                String mave = tblVeCuaToi.getValueAt(row, 0).toString();
+                try {
+                    InsertData.delDatVe(MaKH, mave);
+                    InsertData.LoadDataDatVe(MaKH);
+                    initTable();
+
+                } catch (Exception ex) {
+                    Logger.getLogger(UserPage.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            }
+        }
+
+    }//GEN-LAST:event_btnXoaVeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -958,6 +1003,7 @@ public class UserPage extends javax.swing.JFrame {
     private javax.swing.JButton btnKiemTra;
     private javax.swing.JButton btnThoat;
     private javax.swing.JButton btnTiepTuc;
+    private javax.swing.JButton btnXoaVe;
     private javax.swing.JButton btnlammoi;
     private javax.swing.JButton btnmua;
     private javax.swing.JButton btntimkiem;
@@ -1005,7 +1051,7 @@ public class UserPage extends javax.swing.JFrame {
     private javax.swing.JLabel lblngaybay;
     private javax.swing.JLabel lblthoigian;
     private javax.swing.JTable tblDatVe;
-    private javax.swing.JTable tblVeCuaToi;
+    public static javax.swing.JTable tblVeCuaToi;
     private javax.swing.JTextField txtDiaChi;
     private javax.swing.JTextField txtDiemDen;
     private javax.swing.JTextField txtDiemDi;
