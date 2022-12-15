@@ -479,8 +479,8 @@
                           <Component id="jPanel7" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jLabel30" alignment="0" min="-2" pref="170" max="-2" attributes="0"/>
-                              <Component id="jPanel8" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jPanel8" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel30" min="-2" pref="200" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
@@ -700,6 +700,9 @@
                         </Property>
                         <Property name="text" type="java.lang.String" value="&#x110;&#x1ed5;i V&#xe9;"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDoiVeActionPerformed"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JButton" name="btnTiepTuc">
                       <Properties>

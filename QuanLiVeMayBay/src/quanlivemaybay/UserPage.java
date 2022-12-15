@@ -437,6 +437,11 @@ public class UserPage extends javax.swing.JFrame {
 
         btnDoiVe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/rsz_repeat.png"))); // NOI18N
         btnDoiVe.setText("Đổi Vé");
+        btnDoiVe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDoiVeActionPerformed(evt);
+            }
+        });
 
         btnTiepTuc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/rsz_circled-chevron-right.png"))); // NOI18N
         btnTiepTuc.setText("Tiếp Tục");
@@ -632,8 +637,8 @@ public class UserPage extends javax.swing.JFrame {
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(14, 14, 14)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         jPanel6Layout.setVerticalGroup(
@@ -904,6 +909,12 @@ public class UserPage extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Hãy nhập mã vé!");
         }
     }//GEN-LAST:event_btnKiemTraActionPerformed
+
+    private void btnDoiVeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDoiVeActionPerformed
+        // TODO add your handling code here:
+        dispose();
+        new Doive().setVisible(true);
+    }//GEN-LAST:event_btnDoiVeActionPerformed
 
     /**
      * @param args the command line arguments
