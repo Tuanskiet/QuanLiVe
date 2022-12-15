@@ -35,6 +35,7 @@ public class DangKi extends javax.swing.JFrame {
      * Creates new form DangKi
      */
     public DangKi() {
+        setTitle("Đăng kí tài khoản");
         initComponents();
         setLocationRelativeTo(null);
         setDefaultCloseOperation(this.DISPOSE_ON_CLOSE);
@@ -272,7 +273,7 @@ public class DangKi extends javax.swing.JFrame {
                 Logger.getLogger(DangKi.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else {
-            JOptionPane.showMessageDialog(this, "Vui long nhap lai mat khau!");
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập lại mật khẩu!");
             txtPass.setText("");
             txtPassNL.setText("");
             txtPassNL.requestFocus();

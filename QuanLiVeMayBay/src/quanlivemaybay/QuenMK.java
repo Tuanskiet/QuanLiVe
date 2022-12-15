@@ -45,6 +45,7 @@ public class QuenMK extends javax.swing.JDialog {
     public QuenMK(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setTitle("Quên mật khẩu:");
         setLocationRelativeTo(null);
     }
 
@@ -57,16 +58,16 @@ public class QuenMK extends javax.swing.JDialog {
 
     public boolean checkForm() {
         if (txtTenDN.getText().equals("")) {
-            JOptionPane.showMessageDialog(this, "Chua nhap ten dang nhap!");
+            JOptionPane.showMessageDialog(this, "Chưa nhập tên đăng nhập!");
             txtTenDN.requestFocus();
             return false;
         } else if (txtEmail.getText().equals("")) {
-            JOptionPane.showMessageDialog(this, "Chua nhap mail!");
+            JOptionPane.showMessageDialog(this, "Chưa nhập e-mail!");
             txtEmail.requestFocus();
             return false;
 
         } else if (txtMaXN.getText().equals("")) {
-            JOptionPane.showMessageDialog(this, "Chua nhap ma xac nhan!");
+            JOptionPane.showMessageDialog(this, "Chưa nhập mã xác nhận!");
             txtMaXN.requestFocus();
             return false;
 
@@ -157,43 +158,43 @@ public class QuenMK extends javax.swing.JDialog {
                     .addComponent(jLabel2)
                     .addComponent(jLabel3)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
+                .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtEmail, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtTenDN, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(98, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtTenDN, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(txtMaXN, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(34, 34, 34)
+                        .addComponent(txtMaXN, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnGuiMa)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addGap(27, 27, 27))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(61, 61, 61)
                 .addComponent(jButton1)
                 .addGap(29, 29, 29)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(105, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtTenDN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtMaXN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnGuiMa, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -236,12 +237,12 @@ public class QuenMK extends javax.swing.JDialog {
                         f.setVisible(true);
 
                     } else {
-                        JOptionPane.showMessageDialog(this, "Ma xac nhan sai, vui long nhap lai!");
+                        JOptionPane.showMessageDialog(this, "Mã xác nhận sai vui lòng nhập lại!");
                         txtMaXN.setText("");
                         txtMaXN.requestFocus();
                     }
                 } else {
-                    JOptionPane.showMessageDialog(this, "Tai khoan khong ton tai!");
+                    JOptionPane.showMessageDialog(this, "Tài khoản này không tồn tại nhập lại tài khoản!");
                 }
             } catch (HeadlessException | ClassNotFoundException | SQLException e) {
                 System.out.println(e);
@@ -272,7 +273,7 @@ public class QuenMK extends javax.swing.JDialog {
 
         try {
             mailMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(toEmail));
-            mailMessage.setSubject("Ma xac nhan phan mem quan li ve may bay!");
+            mailMessage.setSubject("Mã xác nhận phầm mểm quản lí máy bay.");
             Random generator = new Random();
 
             maXn = generator.nextInt(1001);
@@ -286,7 +287,7 @@ public class QuenMK extends javax.swing.JDialog {
 
             transport.sendMessage(mailMessage, mailMessage.getAllRecipients());
             transport.close();
-            JOptionPane.showMessageDialog(this, "Da gui ma xn, ban vui long kiem tra email!");
+            JOptionPane.showMessageDialog(this, "Đã gửi mã xác nhận vui lòng bạn kiểm tra e-mail!");
         } catch (AddressException ex) {
             Logger.getLogger(QuenMK.class.getName()).log(Level.SEVERE, null, ex);
         } catch (MessagingException ex) {

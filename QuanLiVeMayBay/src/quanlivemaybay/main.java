@@ -29,6 +29,7 @@ public class main extends javax.swing.JFrame {
      */
     public main() {
         initComponents();
+        setTitle("Hãng hàng không FPT OLY AIRLINES");
         setLocationRelativeTo(null);
 //        try {
 //            this.setContentPane(new JLabel(new ImageIcon(ImageIO.read(new File("images//br.jpg")))));
@@ -309,7 +310,7 @@ public class main extends javax.swing.JFrame {
                         sp.setVisible(true);
                         return;
                     } else {
-                        JOptionPane.showMessageDialog(this, "Đăng nhập vào tài khoản khach hang thành công!");
+                        JOptionPane.showMessageDialog(this, "Đăng nhập vào tài khoản khách hàng thành công!");
 
                         UserPage up = new UserPage(MaKH);
                         this.hide();

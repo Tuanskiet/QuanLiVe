@@ -26,6 +26,7 @@ public class BanVeMB extends javax.swing.JInternalFrame {
      */
     public BanVeMB() {
         initComponents();
+        setTitle("Bán vé máy bay");
         autoID();
         jdcNgayBay.setDate(new Date(System.currentTimeMillis()));
         jdcNgayBan.setDate(new Date(System.currentTimeMillis()));
@@ -98,7 +99,7 @@ public class BanVeMB extends javax.swing.JInternalFrame {
         txtGiaVe = new javax.swing.JTextField();
         jdcNgayBay = new com.toedter.calendar.JDateChooser();
         jdcNgayBan = new com.toedter.calendar.JDateChooser();
-        cboGioBay = new javax.swing.JComboBox<>();
+        txtgiobay = new javax.swing.JTextField();
 
         setPreferredSize(new java.awt.Dimension(900, 568));
 
@@ -125,7 +126,7 @@ public class BanVeMB extends javax.swing.JInternalFrame {
         jPanel1.setLayout(new java.awt.GridBagLayout());
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 3, 24)); // NOI18N
-        jLabel1.setText("Chuong trinh ban ve may bay Poly Ariline");
+        jLabel1.setText("Chương trình bán vé máy bay Poly Ariline");
         jPanel1.add(jLabel1, new java.awt.GridBagConstraints());
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Thong tin can nhap"));
@@ -135,7 +136,7 @@ public class BanVeMB extends javax.swing.JInternalFrame {
 
         jPanel5.setLayout(new java.awt.GridLayout(1, 4, 20, 20));
 
-        jLabel13.setText("Diem di:");
+        jLabel13.setText("Điểm đi:");
         jPanel5.add(jLabel13);
         jPanel5.add(txtDiemDi);
 
@@ -145,7 +146,7 @@ public class BanVeMB extends javax.swing.JInternalFrame {
 
         jPanel6.setLayout(null);
 
-        jLabel3.setText("Ma ve:");
+        jLabel3.setText("Mã vé:");
         jPanel6.add(jLabel3);
         jLabel3.setBounds(0, 0, 90, 36);
 
@@ -172,23 +173,23 @@ public class BanVeMB extends javax.swing.JInternalFrame {
 
         jPanel10.setLayout(null);
 
-        jLabel17.setText("Gio bay:");
+        jLabel17.setText("Giờ bay:");
         jPanel10.add(jLabel17);
-        jLabel17.setBounds(0, 60, 176, 29);
+        jLabel17.setBounds(0, 70, 176, 29);
 
-        jLabel18.setText("Ngay bay:");
+        jLabel18.setText("Ngày bay:");
         jPanel10.add(jLabel18);
-        jLabel18.setBounds(0, 0, 176, 29);
+        jLabel18.setBounds(0, 10, 176, 29);
 
-        jLabel15.setText("Ngay ban:");
+        jLabel15.setText("Ngày bán:");
         jPanel10.add(jLabel15);
         jLabel15.setBounds(390, 10, 170, 29);
 
-        jLabel19.setText("Gia ve:");
+        jLabel19.setText("Giá vé:");
         jPanel10.add(jLabel19);
-        jLabel19.setBounds(390, 60, 170, 29);
+        jLabel19.setBounds(390, 70, 170, 29);
         jPanel10.add(txtGiaVe);
-        txtGiaVe.setBounds(590, 60, 170, 29);
+        txtGiaVe.setBounds(590, 70, 170, 29);
 
         jdcNgayBay.setDateFormatString("yyyy-MM-dd");
         jPanel10.add(jdcNgayBay);
@@ -197,10 +198,8 @@ public class BanVeMB extends javax.swing.JInternalFrame {
         jdcNgayBan.setDateFormatString("yyyy-MM-dd");
         jPanel10.add(jdcNgayBan);
         jdcNgayBan.setBounds(590, 10, 170, 30);
-
-        cboGioBay.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "2", "22", "23", "24" }));
-        jPanel10.add(cboGioBay);
-        cboGioBay.setBounds(200, 70, 170, 24);
+        jPanel10.add(txtgiobay);
+        txtgiobay.setBounds(200, 70, 170, 30);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -225,15 +224,18 @@ public class BanVeMB extends javax.swing.JInternalFrame {
                         .addContainerGap()
                         .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(37, 37, 37)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
+                .addGap(39, 39, 39)
                 .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(27, 27, 27))
         );
 
+        jPanel7.getAccessibleContext().setAccessibleName("Loại vé");
+
         jPanel2.add(jPanel4);
-        jPanel4.setBounds(40, 20, 800, 310);
+        jPanel4.setBounds(40, 30, 800, 330);
+        jPanel4.getAccessibleContext().setAccessibleName("Thông tin vé và chuyến bay");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -264,6 +266,8 @@ public class BanVeMB extends javax.swing.JInternalFrame {
                 .addGap(14, 14, 14))
         );
 
+        jPanel2.getAccessibleContext().setAccessibleName("Thông tin cần nhập");
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -278,7 +282,7 @@ public class BanVeMB extends javax.swing.JInternalFrame {
         } else {
             loaiVe = "Pho Thong";
         }
-        String gioBay = cboGioBay.getSelectedItem().toString();
+        String gioBay = txtgiobay.getText();
         SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd");
         Date ngayBay = jdcNgayBay.getDate();
         Date ngayBan = jdcNgayBan.getDate();
@@ -300,7 +304,6 @@ public class BanVeMB extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBanVe;
     private javax.swing.JButton btnThoat;
-    private javax.swing.JComboBox<String> cboGioBay;
     private javax.swing.ButtonGroup grLoaiVe;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
@@ -327,5 +330,6 @@ public class BanVeMB extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtDiemDi;
     private javax.swing.JTextField txtGiaVe;
     private javax.swing.JTextField txtMaVe;
+    private javax.swing.JTextField txtgiobay;
     // End of variables declaration//GEN-END:variables
 }

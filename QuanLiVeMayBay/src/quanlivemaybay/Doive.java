@@ -36,6 +36,7 @@ public class Doive extends javax.swing.JFrame {
      */
     public Doive() {
         initComponents();
+        setTitle("Đổi vé");
         jdcNgayBay.setDate(new Date(System.currentTimeMillis()));
         InsertData.LoadDataVe();
         setLocationRelativeTo(null);
@@ -130,10 +131,12 @@ public class Doive extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 0, 0));
         jLabel2.setText("Điểm đi:");
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 0, 0));
         jLabel3.setText("Ngày bay : ");
 
         cboDiemDi.setBackground(new java.awt.Color(153, 153, 153));
@@ -143,7 +146,8 @@ public class Doive extends javax.swing.JFrame {
             }
         });
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 0, 0));
         jLabel4.setText("Điểm đến:");
 
         cboDiemDen.setBackground(new java.awt.Color(153, 153, 153));
@@ -157,8 +161,8 @@ public class Doive extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(47, 47, 47)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(cboDiemDi, 0, 175, Short.MAX_VALUE)
@@ -187,7 +191,7 @@ public class Doive extends javax.swing.JFrame {
 
         jButton2.setBackground(new java.awt.Color(153, 153, 153));
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/rsz_web-browser.png"))); // NOI18N
-        jButton2.setText("Kiểm tra");
+        jButton2.setText("Đổi vé");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -233,7 +237,7 @@ public class Doive extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap(297, Short.MAX_VALUE)
+                        .addContainerGap(309, Short.MAX_VALUE)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(69, 69, 69)
                         .addComponent(jButton3)

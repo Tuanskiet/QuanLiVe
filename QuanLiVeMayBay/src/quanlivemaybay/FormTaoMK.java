@@ -30,6 +30,7 @@ public class FormTaoMK extends javax.swing.JFrame {
      */
     public FormTaoMK() {
         initComponents();
+        setTitle("Quên mật khẩu");
         btnOK.setEnabled(true);
         btnDangNhap.setEnabled(false);
         this.setLocationRelativeTo(null);
@@ -143,7 +144,7 @@ public class FormTaoMK extends javax.swing.JFrame {
                 pst.setString(2, tenDN);
 
                 pst.executeUpdate();
-                JOptionPane.showMessageDialog(this, "Update thanh cong!");
+                JOptionPane.showMessageDialog(this, "Update thành công");
                 btnOK.setEnabled(false);
                 btnDangNhap.setEnabled(true);
 
@@ -152,7 +153,7 @@ public class FormTaoMK extends javax.swing.JFrame {
             }
 
         } else {
-            JOptionPane.showMessageDialog(this, "Mat khau khong giong nhau, vui long nhap lai!");
+            JOptionPane.showMessageDialog(this, "Mật khẩu không giống nhau, vui lòng bạn nhập lại!");
         }
     }//GEN-LAST:event_btnOKActionPerformed
 

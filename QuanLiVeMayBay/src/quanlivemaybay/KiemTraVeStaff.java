@@ -25,6 +25,7 @@ public class KiemTraVeStaff extends javax.swing.JInternalFrame {
 
     public KiemTraVeStaff() {
         initComponents();
+        setTitle("Kiểm tra vé máy bay");
         jdcNgayBay.setDate(new Date(System.currentTimeMillis()));
         InsertData.LoadDataVe();
         loadTable();
@@ -79,15 +80,18 @@ public class KiemTraVeStaff extends javax.swing.JInternalFrame {
 
         setPreferredSize(new java.awt.Dimension(900, 568));
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 0, 0));
         jLabel2.setText("Điểm đi:");
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 0, 0));
         jLabel3.setText("Ngày bay : ");
 
         cboDiemDi.setBackground(new java.awt.Color(153, 153, 153));
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 0, 0));
         jLabel4.setText("Điểm đến:");
 
         cboDiemDen.setBackground(new java.awt.Color(153, 153, 153));
@@ -107,7 +111,7 @@ public class KiemTraVeStaff extends javax.swing.JInternalFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(cboDiemDi, 0, 175, Short.MAX_VALUE)
                     .addComponent(jdcNgayBay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 175, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 163, Short.MAX_VALUE)
                 .addComponent(jLabel4)
                 .addGap(101, 101, 101)
                 .addComponent(cboDiemDen, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
