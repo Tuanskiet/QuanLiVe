@@ -11,8 +11,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -21,6 +23,7 @@ import javax.swing.table.DefaultTableModel;
 import quanlivemaybay.helper.DatabaseHelper;
 import quanlivemaybay.helper.InsertData;
 import quanlivemaybay.model.Controler;
+import quanlivemaybay.model.Datvemain;
 import quanlivemaybay.model.User;
 
 /**
@@ -41,6 +44,10 @@ public class StaffPage extends javax.swing.JFrame {
     int index = 0;
     DefaultTableModel dtmNhanVien = null;
     boolean flag = false;
+    DefaultTableModel model = null;
+    Vector row = null;
+
+    ArrayList<Datvemain> listDV = new ArrayList<>();
 
     /**
      * Creates new form StaffPage
@@ -51,7 +58,8 @@ public class StaffPage extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         ss();
-
+        loaddata();
+        tong();
     }
 
     public void autoID() {
@@ -152,6 +160,51 @@ public class StaffPage extends javax.swing.JFrame {
         loadBangNhanVien();
     }
 
+    private void tong() {
+
+        DecimalFormat x = new DecimalFormat("###,###,###");
+
+        float tong = 0;
+        for (int i = 0; i < tblThongKe.getRowCount(); i++) {
+            tong += Float.parseFloat(tblThongKe.getValueAt(i, 3).toString());
+
+        }
+        String kq = x.format(tong) + " " + "VND";
+        lblKq.setText(kq);
+    }
+
+    public void loaddata() {
+        tblModel = (DefaultTableModel) tblThongKe.getModel();
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            Connection con = DriverManager.getConnection(url, user, pass);
+            Statement st = con.createStatement();
+            String sql = "select datve.*, GiaVe  from datve join ve on datve.Mave = ve.Mave";
+            ResultSet rs = st.executeQuery(sql);
+
+            while (rs.next()) {
+                Vector row = new Vector();
+                row.add(rs.getString(1));
+                row.add(rs.getString(2));
+                row.add(rs.getString(3));
+                row.add(rs.getString(5));
+                tblModel.addRow(row);
+
+                String Mave = rs.getString(1);
+                String MaKH = rs.getString(2);
+                String NgayDat = rs.getString(3);
+                String GioDat = rs.getString(4);
+
+                Datvemain hd = new Datvemain(Mave, MaKH, NgayDat, GioDat);
+                listDV.add(hd);
+            }
+            tblThongKe.setModel(tblModel);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return;
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -205,6 +258,15 @@ public class StaffPage extends javax.swing.JFrame {
         cboRole = new javax.swing.JComboBox<>();
         btnFind = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblThongKe = new javax.swing.JTable();
+        lblTong = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        txtTimKiem = new javax.swing.JTextField();
+        btnTimkiem = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        lblKq = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -493,10 +555,9 @@ public class StaffPage extends javax.swing.JFrame {
                                                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 414, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addComponent(jLabel9)))
                                         .addGap(0, 0, Short.MAX_VALUE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(jPanel6Layout.createSequentialGroup()
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 617, Short.MAX_VALUE)
-                                .addGap(18, 18, 18)))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 617, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButton_SuaNhanVien, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton_ThemNhanVien, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -598,15 +659,90 @@ public class StaffPage extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Quản lí NV/KH ", jPanel3);
 
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel3.setText("Thống Kê Doanh Thu");
+
+        tblThongKe.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Mã Vé", "Mã KH", "Ngày đặt", "Gia ve"
+            }
+        ));
+        tblThongKe.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblThongKeMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tblThongKe);
+
+        lblTong.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lblTong.setText("Tổng doanh thu:");
+
+        jLabel4.setText("Tìm Kiếm Theo Mã Vé");
+
+        btnTimkiem.setText("Tìm Kiếm");
+        btnTimkiem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTimkiemActionPerformed(evt);
+            }
+        });
+
+        jButton3.setText("Refesh");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        lblKq.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        lblKq.setForeground(new java.awt.Color(255, 51, 51));
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 900, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap(364, Short.MAX_VALUE)
+                .addComponent(jLabel3)
+                .addGap(287, 287, 287))
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnTimkiem)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton3))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 841, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(lblTong, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27)
+                        .addComponent(lblKq, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 669, Short.MAX_VALUE)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(61, 61, 61)
+                .addComponent(jLabel3)
+                .addGap(14, 14, 14)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnTimkiem)
+                    .addComponent(jButton3))
+                .addGap(33, 33, 33)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(51, 51, 51)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblTong)
+                    .addComponent(lblKq, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Thống kê", jPanel4);
@@ -801,6 +937,59 @@ public class StaffPage extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_formWindowClosing
 
+    private void tblThongKeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblThongKeMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tblThongKeMouseClicked
+
+    private void btnTimkiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimkiemActionPerformed
+        // TODO add your handling code here:
+        try {
+            if (txtTimKiem.getText().length() > 0) {
+                try {
+                    Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+                    Connection con = DriverManager.getConnection(url, user, pass);
+                    String sql = "select datve.*, GiaVe  from datve join ve on datve.Mave = ve.Mave where datve.MaVe = ? ";
+                    PreparedStatement st = con.prepareStatement(sql);
+                    st.setString(1, txtTimKiem.getText());
+                    ResultSet rs = st.executeQuery();
+                    int find = -1;
+                    tblModel.setRowCount(0);
+                    while (rs.next() == true) {
+                        if (txtTimKiem.getText().equals(rs.getString(1))) {
+                            find = 0;
+                            Vector row = new Vector();
+                            row.add(rs.getString(1));
+                            row.add(rs.getString(2));
+                            row.add(rs.getString(3));
+                            row.add(rs.getString(5));
+                            tblModel.addRow(row);
+                        }
+                    }
+                    tblThongKe.setModel(tblModel);
+                    if (find != 0) {
+                        JOptionPane.showMessageDialog(this, "Không Có Mã Vé Mà Bạn Đã Chọn");
+                    }
+
+                    con.close();
+                } catch (Exception e) {
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Vui lòng không để trống!");
+            }
+        } catch (Exception e) {
+        }
+        tong();
+
+    }//GEN-LAST:event_btnTimkiemActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        txtTimKiem.setText("");
+        tblModel.setRowCount(0);
+        loaddata();
+         tong();
+    }//GEN-LAST:event_jButton3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -841,10 +1030,12 @@ public class StaffPage extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnFind;
+    private javax.swing.JButton btnTimkiem;
     private javax.swing.JComboBox<String> cboGT;
     private javax.swing.JComboBox<String> cboRole;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton_KhoiPhucMK;
     private javax.swing.JButton jButton_QuayLai;
     private javax.swing.JButton jButton_SuaNhanVien;
@@ -858,6 +1049,8 @@ public class StaffPage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -867,17 +1060,22 @@ public class StaffPage extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable_NhanVien;
     private javax.swing.JToolBar jToolBar1;
+    private javax.swing.JLabel lblKq;
+    private javax.swing.JLabel lblTong;
+    private javax.swing.JTable tblThongKe;
     private javax.swing.JTextField txtFind;
     private javax.swing.JTextField txtMaNV;
     private javax.swing.JTextField txtMail;
     private javax.swing.JTextField txtPass;
     private javax.swing.JTextField txtSDT;
     private javax.swing.JTextField txtTenNV;
+    private javax.swing.JTextField txtTimKiem;
     private javax.swing.JTextField txtUser;
     // End of variables declaration//GEN-END:variables
 
