@@ -32,8 +32,9 @@ public class UserPage extends javax.swing.JFrame {
     int index = 0;
     String MaKH;
     boolean flag = false;
-//    ArrayList<Datvemain> list = new ArrayList<>();
+    boolean check = false;
 
+//    ArrayList<Datvemain> list = new ArrayList<>();
     /**
      * Creates new form Datve
      */
@@ -59,8 +60,6 @@ public class UserPage extends javax.swing.JFrame {
         loadComboBox();
 
     }
-
-    
 
     private void getListTable() {
         int row = tblDatVe.getSelectedRow();
@@ -852,31 +851,39 @@ public class UserPage extends javax.swing.JFrame {
     }//GEN-LAST:event_tblDatVeMouseClicked
 
     private void btnKiemTraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKiemTraActionPerformed
-        for (VeMayBay ve : Controler.arrayListVe) {
-            if (txtMaVe.getText().equals(ve.getMaVe())) {
-                flag = true;
-                txtDiemDen.setText(ve.getDiemden());
-                txtDiemDi.setText(ve.getDiemdi());
-                txtGioBay.setText(ve.getGioBay());
-                txtNgayBay.setText(ve.getNgayBay());
-                txtLoaiVe.setText(ve.getLoaiVe());
+        for (Datvemain dv : Controler.arrayListDatVe) {
+            if (txtMaVe.getText().equals(dv.getMaVe())) {
+                check = true;
+                for (VeMayBay ve : Controler.arrayListVe) {
+                    if (txtMaVe.getText().equals(ve.getMaVe())) {
+                        flag = true;
+                        txtDiemDen.setText(ve.getDiemden());
+                        txtDiemDi.setText(ve.getDiemdi());
+                        txtGioBay.setText(ve.getGioBay());
+                        txtNgayBay.setText(ve.getNgayBay());
+                        txtLoaiVe.setText(ve.getLoaiVe());
+                    }
+                }
 
+                for (User us : Controler.arrayListTaiKhoan) {
+                    if (MaKH.equals(us.getMaKH())) {
+                        txtMaKhachHang.setText(us.getMaKH());
+                        txtTenKhachHang.setText(us.getTenKH());
+                        txtGioiTinh.setText(us.getGioiTinh());
+                        txtSoDienThoai.setText(us.getSDT());
+
+                    }
+                }
+                if (flag == false) {
+                    JOptionPane.showMessageDialog(this, "Hãy nhập mã vé!");
+                }
             }
         }
-
-        for (User us : Controler.arrayListTaiKhoan) {
-            if (MaKH.equals(us.getMaKH())) {
-
-                txtMaKhachHang.setText(us.getMaKH());
-                txtTenKhachHang.setText(us.getTenKH());
-                txtGioiTinh.setText(us.getGioiTinh());
-                txtSoDienThoai.setText(us.getSDT());
-
-            }
+        if (check == false) {
+            JOptionPane.showMessageDialog(this, "Không tìm thấy vé trong danh sách vé của bạn!");
         }
-        if (flag == false) {
-            JOptionPane.showMessageDialog(this, "Hãy nhập mã vé!");
-        }
+
+
     }//GEN-LAST:event_btnKiemTraActionPerformed
 
     private void btnDoiVeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDoiVeActionPerformed

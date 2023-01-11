@@ -29,7 +29,7 @@ public class main extends javax.swing.JFrame {
      */
     public main() {
         initComponents();
-        setTitle("Hãng hàng không FPT OLY AIRLINES");
+        setTitle("Hãng hàng không FPT POLY AIRLINES");
         setLocationRelativeTo(null);
 //        try {
 //            this.setContentPane(new JLabel(new ImageIcon(ImageIO.read(new File("images//br.jpg")))));

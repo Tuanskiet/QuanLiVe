@@ -84,6 +84,7 @@ public class Doive extends javax.swing.JFrame {
         }
         dtmVe.fireTableDataChanged();
     }
+    
     public static void loadTablee(){
         DefaultTableModel tblmodelVeCuaToi = (DefaultTableModel) UserPage.tblVeCuaToi.getModel();
 
@@ -190,8 +191,8 @@ public class Doive extends javax.swing.JFrame {
         );
 
         jButton2.setBackground(new java.awt.Color(153, 153, 153));
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/rsz_web-browser.png"))); // NOI18N
-        jButton2.setText("Đổi vé");
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/search.png"))); // NOI18N
+        jButton2.setText("TÌm kiếm ");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -322,7 +323,7 @@ public class Doive extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         this.setVisible(false);
-        
+        loadTablee();
 
         jframe.setVisible(true);
 
@@ -369,6 +370,7 @@ public class Doive extends javax.swing.JFrame {
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         this.setVisible(false);
+        loadTablee();
         jframe.setVisible(true);
     }//GEN-LAST:event_formWindowClosing
 
